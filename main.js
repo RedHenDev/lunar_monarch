@@ -14,8 +14,10 @@ function preload(){
   
   // Must load font for
   // WEBGL context.
-  myFont=loadFont('OpenSans-Regular.ttf');
-  textFont(myFont);
+//  myFont=loadFont('OpenSans-Regular.ttf');
+//  textFont(myFont);
+//	textSize(32);
+//	textAlign(CENTER,CENTER);
 }
 
 function setup() {
@@ -46,20 +48,36 @@ function setup() {
   pMouseX=mouseX;
   pMouseY=mouseY;
 
-  bs = floor((height/rows)*3);
+  bs = floor((height/rows)*blockScaleFactor);
   bh = bs * 2;
-  
+	
   startRadio();
-  
   genTerrain();
 
 }
 
+
 function draw(){
+	
   doInput();
   engine();
   genTerrain();
-  fill('#ED225D');
-  // textSize(36);
-  // text(frameRate,10,50);
+	
+	push();
+	translate(0,0,0);
+	//strokeWeight(1);
+	//stroke(255);
+	fill(255,0,0);
+  text("Area: ",
+         -width/2,
+         -height/2);
+	//textSize(42);
+	//ui.circle(mouseX,mouseY,42);
+	//ui.background(0,42,42);
+	
+	plane(64,64);
+	//fill(255,0,0);
+	//circle(0,0,64);
+	pop();
+	
 }

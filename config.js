@@ -11,10 +11,11 @@ let goblin;
 let goblinY=0;
 
 let tVanish=false; // Terrain vanish?
-let bs = 1;      // Block size.
+let bs = 1;      // Block size. Leave as 1.
+let blockScaleFactor=3;
 // NB adjusted in setup().
-let rows=32;  // How many blocks?
-let cols=32;
+let rows=36;  // How many blocks?
+let cols=36;
 let bh;    // Block height.
 let freq = 800;  // Perlin frequency.
 let amp = 16;    // Perlin amplitude.

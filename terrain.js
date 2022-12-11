@@ -67,7 +67,7 @@ function genTerrain(){
               floor(-y*bs),
               floor(z*bs));
     //texture(soilTex);
-    specularMaterial(128);
+    //specularMaterial(128);
     shininess(0.1);
     if (!tVanish){
     box(bs,bh,bs);
@@ -94,11 +94,14 @@ function genTerrain(){
                  posX)/freq,
           (adjust-posZ)/freq)*amp;
   let target=bh*y*0.5;
+	// Go up or down?
   let guod=target-subY;
+	let buggyScale=42;
    subY=lerp(subY,target,0.2);
    // if (frameCount % 200===0)
    //   print(y);
-  translate(0,-subY-bh-32,0);
+	let lunarBob=Math.sin(frameCount*0.1)*buggyScale*0.5;
+  translate(0,-subY-bh-buggyScale*2+lunarBob,0);
     goblinY=
       lerp(goblinY,steerY,0.4);
     //rotateX(180);
@@ -113,11 +116,11 @@ function genTerrain(){
     rotateZ(-guod*0.08);
     // Shakey.
     //rotateX(random()*5-2.5);
-    scale(42);
-    //normalMaterial();
+    scale(buggyScale);
+    normalMaterial();
     //specularMaterial(75);
-    emissiveMaterial(0,255,32);
-    shininess(0.01);
+    //emissiveMaterial(0,255,32);
+    shininess(0.1);
     
     //sphere(64);
     model(goblin);
