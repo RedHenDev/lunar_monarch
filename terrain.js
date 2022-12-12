@@ -58,7 +58,7 @@ push();
     rotateY(goblinY+90);
     rotateY(180);
     // Nodding pitch animation.
-    rotateZ(-guod*0.04);
+    rotateZ(-guod*0.1);
     // Shakey.
     //rotateX(random()*5-2.5);
     scale(buggyScale);
@@ -131,14 +131,14 @@ push();
 	translate(0,amp*tbh*0.3,0);
 	rotateX(90);
 	
-	//fill(100);
+	fill(255);
 	//stroke(0);
 	//strokeWeight(1);
 	//specularMaterial(74);
   //shininess(50);
 	//textureMode(NORMAL);
 	//textureWrap(REPEAT,REPEAT);
-	texture(soilTex);
+	texture(moonTex);
 	
 	for (let z = -trows*0.5; z < trows*0.5; z+=1){
 		beginShape(TRIANGLE_STRIP)

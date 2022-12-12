@@ -7,8 +7,9 @@ function preload(){
   // goblin=
   //   loadModel('car1.obj');
   goblin=
-    loadModel('shuttle.obj');
-  soilTex=loadImage('soil.jpg');
+    loadModel('assets/shuttle.obj');
+  moonTex=loadImage('assets/moon_tex.png');
+	//moonTex=loadImage('assets/moon_tex.png');
   
   loadSounds();
   
@@ -73,7 +74,7 @@ function setup() {
   bh = bs * 2;
 	
 	//ambientLight(50);
-	
+	setupStars();
   startRadio();
   genTerrain();
 
@@ -84,13 +85,16 @@ function draw(){
 	
   doInput();
   engine();
-  genTerrain();
 	
-	pg.background(255);
-  pg.text(random(0,9),0,100);
+  genTerrain();
+	//drawStars();
+	// ui
+	pg.background(0,100,100);
+	pg.fill(255);
+  pg.text(frameRate(),0,100);
   //pass image as texture
   texture(pg);
-  rotateX(45);
+  //rotateX(frameCount);
   //noStroke();
   plane(200);
 	
