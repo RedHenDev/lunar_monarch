@@ -52,7 +52,9 @@ function setup() {
   pMouseY=mouseY;
 
   bs = floor((height/rows)*blockScaleFactor);
-  bh = bs * 2;
+  //bh = bs * 2;
+	bs = 42;
+	bh = amp*6;
 	
   startRadio();
   genTerrain();

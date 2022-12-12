@@ -5,7 +5,7 @@ const thrust=0.2;
 
 // Precision of trig movement.
 //const prec = bs*0.86;
-const prec = 0.1;
+const prec = bs*0.86;
  
 function setupLoco(){
   acc=createVector();
@@ -14,6 +14,19 @@ function setupLoco(){
 }
 
 function engine(){
+	traj=createVector();
+  traj.x=(sin(steerY))*acc.x;
+  traj.y=(cos(steerY))*acc.y;
+  
+  vel.add(traj);
+  landPos.add(vel);
+	posZ = landPos.y*bs;
+	posX = -landPos.x*bs;
+	
+	vel.mult(0.92);
+	acc.mult(0);
+	return;
+	
   traj=createVector();
   traj.x=bs*(sin(steerY))*acc.x;
   traj.y=bs*(cos(steerY))*acc.y;

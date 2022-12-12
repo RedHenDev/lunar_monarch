@@ -1,6 +1,25 @@
 let ground;
 let grounded=false;
 
+function genTerrain(){
+	if (!grounded) setupGroundPlane();
+	
+	push();
+	
+	//background(0,132,232);
+  background(0,0,0);
+	
+	lightingSteering();
+	
+	triTerrain();
+  
+  //voxelTerrain();
+  
+	renderCraft();
+  
+  pop();
+}
+
 function setupGroundPlane(){
 	//ground=plane(1024,1024,512,512);
 }
@@ -17,7 +36,8 @@ push();
 	
 	// Go up or down?
   let guod=target-subY;
-	let buggyScale=42;
+	// default scale is 42.
+	let buggyScale=6;
   subY=lerp(subY,target,0.2);
    // if (frameCount % 200===0)
    //   print(y);
@@ -54,9 +74,9 @@ push();
 function lightingSteering(){
 // Lighting.
   let locX = mouseX - width * 0.5;
-  pointLight(177, 177, 277,
-             locX, mouseY-
-             height*0.5,
+  
+	pointLight(177, 177, 277,
+             locX, -2048,
              Math.sin(frameCount*
                       0.01)*2000);
   
@@ -67,8 +87,9 @@ function lightingSteering(){
   // NB here we can move the
   // camera away from terrain
   // by -n.
-  translate(0,amp*bh*0.6,-940);
-  //rotateX(-5);
+  //translate(0,amp*bh*0.6,-940);
+	translate(0,amp*bh*0.42,bs);
+  rotateX(-15);
   // Pitch control.
   steerX+=(mouseY-
         pMouseY)*mouseSensitivity;
@@ -92,22 +113,20 @@ function lightingSteering(){
 
 function triTerrain(){
 push();
-	//translate(width*0.5,height*0.5,0);
 	
-	translate(-cols*0.5*bs,amp*bh*0.4,-rows*0.5*bs);
+	//translate(-cols*0.5*bs,amp*bh*0.4,-rows*0.5*bs);
+	translate(0,amp*bh*0.3,0);
 	rotateX(90);
 	
-	//rotateY(frameCount);
-	fill(200,0,200);
-	stroke(255);
-	strokeWeight(4);
-//	a=plane(256,256,32,32);
-//	a.verts[0].y += 0.01*frameCount;
+	fill(200);
+	//stroke(0);
+	//strokeWeight(1);
+	specularMaterial(128);
 	const vh=bh
 	
-	for (let z = 0; z < rows; z+=1){
+	for (let z = -rows*0.5; z < rows*0.5; z+=1){
 		beginShape(TRIANGLE_STRIP)
-		for (let x = 0; x < cols; x+=1){
+		for (let x = -cols*0.5; x < cols*0.5; x+=1){
 		let y = noise((adjust+x*bs-posX)/freq,
                   (adjust+z*bs-posZ)/freq)*amp;
 		let y2 = noise((adjust+x*bs-posX)/freq,
@@ -171,21 +190,3 @@ function voxelTerrain(){
   } 	
 }
 
-function genTerrain(){
-	if (!grounded) setupGroundPlane();
-	
-	push();
-	
-	//background(0,132,232);
-  background(0,0,0);
-	
-	lightingSteering();
-	
-	triTerrain();
-  
-  //voxelTerrain();
-  
-	renderCraft();
-  
-  pop();
-}
