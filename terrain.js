@@ -9,28 +9,12 @@ function genTerrain(){
 	//background(0,132,232);
   background(0,0,0);
 	
-	rows=32;
-	cols=32;
-	bs = floor(((height+100-4)/(rows+100-4))*blockScaleFactor);
-  bh = bs * 2;
 	lightingSteering();
 	
-	rows=128;
-	cols=128;
-	bs = 42;
-	bh = amp*6;
 	triTerrain();
 	
-	rows=32;
-	cols=32;
-	bs = floor(((height+100-4)/(rows+100-4))*blockScaleFactor);
-  bh = bs * 2;
   voxelTerrain();
-  
-	rows=128;
-	cols=128;
-	bs = 42;
-	bh = amp*6;
+
 	renderCraft();
   
   pop();
@@ -49,12 +33,12 @@ push();
                  posX)/freq,
           (adjust-posZ)/freq)*amp;
   //let target=bh*y*0.5;
-	target=y*amp;
+	target=y*0.5*bh;
 	
 	// Go up or down?
   let guod=target-subY;
 	// default scale is 42.
-	let buggyScale=6;
+	let buggyScale=42;
   subY=lerp(subY,target,0.2);
    // if (frameCount % 200===0)
    //   print(y);
@@ -92,17 +76,17 @@ function lightingSteering(){
 // Lighting.
   let locX = mouseX - width * 0.5;
   
-//	pointLight(177, 177, 277,
-//             locX, 0,
-//             Math.sin(frameCount*
-//                      0.01)*2000);
+	pointLight(255, 255, 255,
+             locX, -8000,
+             Math.sin(frameCount*
+                      0.01)*2000);
 	
-	pointLight(177, 177, 277,
-             locX, 0,
-             1000);
-	pointLight(177, 177, 277,
-             locX+1000, 0,
-             1000);
+	pointLight(177, 0, 255,
+             -width*0.5+100, 0,
+             -2000);
+	pointLight(0, 255, 0,
+             width*0.5-100, 0,
+             -2000);
   
   // Positioning of camera.
   // We correlate this to max
@@ -116,9 +100,9 @@ function lightingSteering(){
 	// Sync with triterrain.
 	//translate(0,amp*bh*0.42,bs*2);
 	
-	translate(0,amp*64,-100);
+	translate(0,amp*64,-450);
   
-	rotateX(-15);
+	rotateX(-25);
   // Pitch control.
   steerX+=(mouseY-
         pMouseY)*mouseSensitivity;
@@ -144,26 +128,27 @@ function triTerrain(){
 push();
 	
 	//translate(-cols*0.5*bs,amp*bh*0.4,-rows*0.5*bs);
-	translate(0,amp*bh*0.3,0);
+	translate(0,amp*tbh*0.3,0);
 	rotateX(90);
 	
-	fill(100);
+	//fill(100);
 	//stroke(0);
 	//strokeWeight(1);
-	specularMaterial(250);
-  shininess(50);
-	//ambientMaterial();
-	const vh=bh
+	//specularMaterial(74);
+  //shininess(50);
+	//textureMode(NORMAL);
+	//textureWrap(REPEAT,REPEAT);
+	texture(soilTex);
 	
-	for (let z = -rows*0.5; z < rows*0.5; z+=1){
+	for (let z = -trows*0.5; z < trows*0.5; z+=1){
 		beginShape(TRIANGLE_STRIP)
-		for (let x = -cols*0.5; x < cols*0.5; x+=1){
-		let y = noise((adjust+x*bs-posX)/freq,
-                  (adjust+z*bs-posZ)/freq)*amp;
-		let y2 = noise((adjust+x*bs-posX)/freq,
-                  (adjust+(z+1)*bs-posZ)/freq)*amp;
-			vertex(x*bs,z*bs,y*vh);
-			vertex(x*bs,(z+1)*bs,y2*vh);
+		for (let x = -tcols*0.5; x < tcols*0.5; x+=1){
+		let y = noise((adjust+x*tbs-posX)/freq,
+                  (adjust+z*tbs-posZ)/freq)*amp;
+		let y2 = noise((adjust+x*tbs-posX)/freq,
+                  (adjust+(z+1)*tbs-posZ)/freq)*amp;
+			vertex(x*tbs,z*tbs,y*tbh);
+			vertex(x*tbs,(z+1)*tbs,y2*tbh);
 		}
 		endShape();
 	}
@@ -197,12 +182,19 @@ function voxelTerrain(){
     translate(floor(x*bs),
               floor(-y*bs),
               floor(z*bs));
-    //texture(soilTex);
-    //specularMaterial(128,0,0,80);
-		fill(128,0,0,10);
-    shininess(0.1);
     
-    box(bs,bh,bs);
+		//texture(soilTex);
+			
+    //specularMaterial(0,200,0);
+		//shininess(0.6);
+			
+		fill(0,255,0,32);
+		//stroke(0,0,0,32);
+		//strokeWeight(3);
+    
+		rotateX(90);
+    plane(bs,bs);
+    //box(bs,bh,bs);
       /*
     // Now translate to just above block
     // to draw another, flat block to

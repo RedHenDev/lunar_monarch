@@ -20,6 +20,12 @@ let cols=128;
 let bh;    // Block height.
 let freq = 800;  // Perlin frequency.
 let amp = 16;    // Perlin amplitude.
+
+// For tris.
+let trows=128;
+let tcols=128;
+let tbs = 42;
+let tbh = amp*6;
        
 let mc = false;   // Minecraft look?
 let posZ = 0;     // posZition in Perlin terrain.
