@@ -90,20 +90,26 @@ function genTerrain(){
   } 
   push();
     
+	// Oh, to optimize a little I could record this
+	// value from above terrain generation.
   let y = noise((adjust-
                  posX)/freq,
           (adjust-posZ)/freq)*amp;
   let target=bh*y*0.5;
+	
 	// Go up or down?
   let guod=target-subY;
 	let buggyScale=42;
-   subY=lerp(subY,target,0.2);
+  subY=lerp(subY,target,0.2);
    // if (frameCount % 200===0)
    //   print(y);
-	let lunarBob=Math.sin(frameCount*0.1)*buggyScale*0.5;
-  translate(0,-subY-bh-buggyScale*2+lunarBob,0);
+	let lunarBob=Math.sin(frameCount*0.1)*
+			buggyScale*0.5;
+  translate(0,
+						-subY-bh-buggyScale*2+lunarBob,
+						0);
     goblinY=
-      lerp(goblinY,steerY,0.4);
+      lerp(goblinY,steerY,0.1);
     //rotateX(180);
     // These rotations for
     //shuttle.
@@ -112,8 +118,8 @@ function genTerrain(){
     rotateZ(180);
     rotateY(goblinY+90);
     rotateY(180);
-    // Nodding anim.
-    rotateZ(-guod*0.08);
+    // Nodding pitch animation.
+    rotateZ(-guod*0.04);
     // Shakey.
     //rotateX(random()*5-2.5);
     scale(buggyScale);

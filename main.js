@@ -27,6 +27,9 @@ function setup() {
   
   angleMode(DEGREES);
   
+	// To display 3D cords on screen.
+	//debugMode();
+	
   strokeWeight(8);
   noStroke();
   noiseSeed(99);
@@ -62,22 +65,5 @@ function draw(){
   doInput();
   engine();
   genTerrain();
-	
-	push();
-	translate(0,0,0);
-	//strokeWeight(1);
-	//stroke(255);
-	fill(255,0,0);
-  text("Area: ",
-         -width/2,
-         -height/2);
-	//textSize(42);
-	//ui.circle(mouseX,mouseY,42);
-	//ui.background(0,42,42);
-	
-	plane(64,64);
-	//fill(255,0,0);
-	//circle(0,0,64);
-	pop();
 	
 }
