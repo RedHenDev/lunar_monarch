@@ -15,8 +15,8 @@ let bs = 1;      // Block size. Leave as 1.
 let blockScaleFactor=9;
 // NB adjusted in setup().
 // 32 for performance.
-let rows=56;  // How many blocks?
-let cols=56;
+let rows=128;  // How many blocks?
+let cols=128;
 let bh;    // Block height.
 let freq = 800;  // Perlin frequency.
 let amp = 16;    // Perlin amplitude.

@@ -2,19 +2,35 @@ let ground;
 let grounded=false;
 
 function genTerrain(){
-	if (!grounded) setupGroundPlane();
+	//if (!grounded) setupGroundPlane();
 	
 	push();
 	
 	//background(0,132,232);
   background(0,0,0);
 	
+	rows=32;
+	cols=32;
+	bs = floor(((height+100-4)/(rows+100-4))*blockScaleFactor);
+  bh = bs * 2;
 	lightingSteering();
 	
+	rows=128;
+	cols=128;
+	bs = 42;
+	bh = amp*6;
 	triTerrain();
+	
+	rows=32;
+	cols=32;
+	bs = floor(((height+100-4)/(rows+100-4))*blockScaleFactor);
+  bh = bs * 2;
+  voxelTerrain();
   
-  //voxelTerrain();
-  
+	rows=128;
+	cols=128;
+	bs = 42;
+	bh = amp*6;
 	renderCraft();
   
   pop();
@@ -32,7 +48,8 @@ push();
   let y = noise((adjust-
                  posX)/freq,
           (adjust-posZ)/freq)*amp;
-  let target=bh*y*0.5;
+  //let target=bh*y*0.5;
+	target=y*amp;
 	
 	// Go up or down?
   let guod=target-subY;
@@ -75,10 +92,17 @@ function lightingSteering(){
 // Lighting.
   let locX = mouseX - width * 0.5;
   
+//	pointLight(177, 177, 277,
+//             locX, 0,
+//             Math.sin(frameCount*
+//                      0.01)*2000);
+	
 	pointLight(177, 177, 277,
-             locX, -2048,
-             Math.sin(frameCount*
-                      0.01)*2000);
+             locX, 0,
+             1000);
+	pointLight(177, 177, 277,
+             locX+1000, 0,
+             1000);
   
   // Positioning of camera.
   // We correlate this to max
@@ -88,8 +112,13 @@ function lightingSteering(){
   // camera away from terrain
   // by -n.
   //translate(0,amp*bh*0.6,-940);
-	translate(0,amp*bh*0.42,bs);
-  rotateX(-15);
+	
+	// Sync with triterrain.
+	//translate(0,amp*bh*0.42,bs*2);
+	
+	translate(0,amp*64,-100);
+  
+	rotateX(-15);
   // Pitch control.
   steerX+=(mouseY-
         pMouseY)*mouseSensitivity;
@@ -118,10 +147,12 @@ push();
 	translate(0,amp*bh*0.3,0);
 	rotateX(90);
 	
-	fill(200);
+	fill(100);
 	//stroke(0);
 	//strokeWeight(1);
-	specularMaterial(128);
+	specularMaterial(250);
+  shininess(50);
+	//ambientMaterial();
 	const vh=bh
 	
 	for (let z = -rows*0.5; z < rows*0.5; z+=1){
@@ -167,7 +198,8 @@ function voxelTerrain(){
               floor(-y*bs),
               floor(z*bs));
     //texture(soilTex);
-    //specularMaterial(128);
+    //specularMaterial(128,0,0,80);
+		fill(128,0,0,10);
     shininess(0.1);
     
     box(bs,bh,bs);

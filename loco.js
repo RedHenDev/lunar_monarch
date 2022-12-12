@@ -14,7 +14,8 @@ function setupLoco(){
 }
 
 function engine(){
-	traj=createVector();
+	// Plane engine version.
+	let traj=createVector();
   traj.x=(sin(steerY))*acc.x;
   traj.y=(cos(steerY))*acc.y;
   
@@ -27,6 +28,7 @@ function engine(){
 	acc.mult(0);
 	return;
 	
+	// Voxel engine version.
   traj=createVector();
   traj.x=bs*(sin(steerY))*acc.x;
   traj.y=bs*(cos(steerY))*acc.y;
