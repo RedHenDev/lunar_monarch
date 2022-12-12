@@ -13,7 +13,7 @@ function genTerrain(){
 	
 	triTerrain();
 	
-  voxelTerrain();
+  //voxelTerrain();
 
 	renderCraft();
   
@@ -74,12 +74,16 @@ push();
 
 function lightingSteering(){
 // Lighting.
-  let locX = mouseX - width * 0.5;
+  //let locX = mouseX - width * 0.5;
   
-	pointLight(255, 255, 255,
-             locX, -8000,
-             Math.sin(frameCount*
-                      0.01)*2000);
+//	pointLight(255, 255, 255,
+//             - width * 0.5, -4000,
+//             Math.sin(frameCount*
+//                      0.01)*2000);
+	lights();
+//	pointLight(255, 255, 255,
+//             - width * 0.5, -1000,
+//             -2000);
 	
 	pointLight(177, 0, 255,
              -width*0.5+100, 0,
@@ -87,7 +91,10 @@ function lightingSteering(){
 	pointLight(0, 255, 0,
              width*0.5-100, 0,
              -2000);
-  
+//  directionalLight(250, 250, 250,
+//									 -width * 0.5, 
+//									 -height * 0.5, 
+//									 -1);
   // Positioning of camera.
   // We correlate this to max
   // amp of terrain; so, mult this
@@ -100,15 +107,16 @@ function lightingSteering(){
 	// Sync with triterrain.
 	//translate(0,amp*bh*0.42,bs*2);
 	
-	translate(0,amp*64,-450);
+	translate(0,amp*32,-1950);
   
 	rotateX(-25);
   // Pitch control.
-  steerX+=(mouseY-
-        pMouseY)*mouseSensitivity;
-  pMouseY=mouseY;
-  if (steerX<-5) steerX = -5;
-  else if (steerX>45) steerX = 45;
+//  steerX+=(mouseY-
+//        pMouseY)*mouseSensitivity;
+  //pMouseY=mouseY;
+//  if (steerX<-5) steerX = -5;
+//  else if (steerX>45) steerX = 45;
+	
   steerY+=(mouseX-pMouseX)*mouseSensitivity;
    // *0.5 above Dampen yaw.
 	// NB p5 now features a movedX and movedY for mouse!
@@ -134,11 +142,11 @@ push();
 	fill(255);
 	//stroke(0);
 	//strokeWeight(1);
-	//specularMaterial(74);
-  //shininess(50);
+	specularMaterial(74);
+  shininess(0.1);
 	//textureMode(NORMAL);
 	//textureWrap(REPEAT,REPEAT);
-	texture(moonTex);
+	//texture(moonTex);
 	
 	for (let z = -trows*0.5; z < trows*0.5; z+=1){
 		beginShape(TRIANGLE_STRIP)

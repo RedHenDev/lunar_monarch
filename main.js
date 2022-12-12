@@ -64,7 +64,7 @@ function setup() {
 	
 	trows=128; // Default 128. Performance.
 	tcols=128;
-	tbs = 64; // Default 42.
+	tbs = 128; // Default 42.
 	tbh = amp*6;
 	
 	rows=32; // 32 Performant.
@@ -89,13 +89,13 @@ function draw(){
   genTerrain();
 	//drawStars();
 	// ui
-	pg.background(0,100,100);
-	pg.fill(255);
-  pg.text(frameRate(),0,100);
-  //pass image as texture
-  texture(pg);
-  //rotateX(frameCount);
-  //noStroke();
-  plane(200);
+//	pg.background(0,100,100);
+//	pg.fill(255);
+//  pg.text(frameRate(),0,100);
+//  //pass image as texture
+//  texture(pg);
+//  //rotateX(frameCount);
+//  //noStroke();
+//  plane(200);
 	
 }
