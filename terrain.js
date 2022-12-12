@@ -1,94 +1,12 @@
-function genTerrain(){
-  
-  //background(0,132,232);
-  background(0,0,0);
-  
-  push();
-  
-  // Lighting.
-  let locX = mouseX - width * 0.5;
-  pointLight(177, 177, 177,
-             locX, mouseY-
-             height*0.5,
-             Math.sin(frameCount*
-                      0.01)*2000);
-  
-  // Positioning of camera.
-  // We correlate this to max
-  // amp of terrain; so, mult this
-  // by half the voxel height.
-  // NB here we can move the
-  // camera away from terrain
-  // by -n.
-  translate(0,amp*bh*0.6,-940);
-  //rotateX(-5);
-  // Pitch control.
-  steerX+=(mouseY-
-        pMouseY)*mouseSensitivity;
-  pMouseY=mouseY;
-  if (steerX<-5) steerX = -5;
-  else if (steerX>45) steerX = 45;
-  steerY+=(mouseX-pMouseX)*mouseSensitivity;
-   // *0.5 above Dampen yaw.
-  pMouseX=mouseX;
-  //rotateX(-steerX);
-  rotateY(steerY);
-  
-  // Mousetrap.
-  // Prevents mouse getting stuck steering.
-//   if (mouseX < 5) {pMouseX=
-// pMouseX=mouseX=width*0.5;
-//   pMouseY=mouseY=height*0.5;}
-//   // if (mouseX > width-5) {pMouseX=mouseX=5;}
-  
-  // Our grid of blocks.
-  for (let z = -rows*0.5; z < rows*0.5; z++){
-    for (let x = -cols*0.5; x < cols*0.5; x++){
-    push();
-      
-    // Perlin noise to derive y-posZ
-    // of each block.
-      //posX = posX + 0.1;
-    let y = noise((adjust+x*bs-posX)/freq,
-                  (adjust+z*bs-posZ)/freq)*amp;
-      
-    // If 'minecraft' mode of appearance,
-    // round down y posZ to a whole number,
-    // and draw black block outlines.
-    if (mc) {
-      y = floor(y);
-      //stroke(0);
-    } else {
-      //noStroke();
-    }
-      
-    // Translate to block posZ.
-    translate(floor(x*bs),
-              floor(-y*bs),
-              floor(z*bs));
-    //texture(soilTex);
-    //specularMaterial(128);
-    shininess(0.1);
-    if (!tVanish){
-    box(bs,bh,bs);
-      /*
-    // Now translate to just above block
-    // to draw another, flat block to
-    // serve as grass.
-    translate(0,-bh*0.51,0);
-    //texture(grass);
-    specularMaterial(0,255,0);
-    // White 'snow' if at particular height.
-    if (y > 8)emissiveMaterial(255);
-    shininess(100);
-    box(bs,bs*0.1,bs);
-    */
-    }
-    pop();
-    }
-    
-  } 
-  push();
+let ground;
+let grounded=false;
+
+function setupGroundPlane(){
+	//ground=plane(1024,1024,512,512);
+}
+
+function renderCraft(){
+push();
     
 	// Oh, to optimize a little I could record this
 	// value from above terrain generation.
@@ -130,7 +48,144 @@ function genTerrain(){
     
     //sphere(64);
     model(goblin);
-  pop();
+  pop();	
+}
+
+function lightingSteering(){
+// Lighting.
+  let locX = mouseX - width * 0.5;
+  pointLight(177, 177, 277,
+             locX, mouseY-
+             height*0.5,
+             Math.sin(frameCount*
+                      0.01)*2000);
+  
+  // Positioning of camera.
+  // We correlate this to max
+  // amp of terrain; so, mult this
+  // by half the voxel height.
+  // NB here we can move the
+  // camera away from terrain
+  // by -n.
+  translate(0,amp*bh*0.6,-940);
+  //rotateX(-5);
+  // Pitch control.
+  steerX+=(mouseY-
+        pMouseY)*mouseSensitivity;
+  pMouseY=mouseY;
+  if (steerX<-5) steerX = -5;
+  else if (steerX>45) steerX = 45;
+  steerY+=(mouseX-pMouseX)*mouseSensitivity;
+   // *0.5 above Dampen yaw.
+	// NB p5 now features a movedX and movedY for mouse!
+  pMouseX=mouseX;
+  //rotateX(-steerX);
+  rotateY(steerY);
+  
+  // Mousetrap.
+  // Prevents mouse getting stuck steering.
+//   if (mouseX < 5) {pMouseX=
+// pMouseX=mouseX=width*0.5;
+//   pMouseY=mouseY=height*0.5;}
+//   // if (mouseX > width-5) {pMouseX=mouseX=5;}	
+}
+
+function triTerrain(){
+push();
+	//translate(width*0.5,height*0.5,0);
+	
+	translate(-cols*0.5*bs,amp*bh*0.4,-rows*0.5*bs);
+	rotateX(90);
+	
+	//rotateY(frameCount);
+	fill(200,0,200);
+	stroke(255);
+	strokeWeight(4);
+//	a=plane(256,256,32,32);
+//	a.verts[0].y += 0.01*frameCount;
+	const vh=bh
+	
+	for (let z = 0; z < rows; z+=1){
+		beginShape(TRIANGLE_STRIP)
+		for (let x = 0; x < cols; x+=1){
+		let y = noise((adjust+x*bs-posX)/freq,
+                  (adjust+z*bs-posZ)/freq)*amp;
+		let y2 = noise((adjust+x*bs-posX)/freq,
+                  (adjust+(z+1)*bs-posZ)/freq)*amp;
+			vertex(x*bs,z*bs,y*vh);
+			vertex(x*bs,(z+1)*bs,y2*vh);
+		}
+		endShape();
+	}
+	
+	pop();	
+}
+
+function voxelTerrain(){
+// Our grid of blocks.
+  for (let z = -rows*0.5; z < rows*0.5; z++){
+    for (let x = -cols*0.5; x < cols*0.5; x++){
+    push();
+      
+    // Perlin noise to derive y-posZ
+    // of each block.
+      //posX = posX + 0.1;
+    let y = noise((adjust+x*bs-posX)/freq,
+                  (adjust+z*bs-posZ)/freq)*amp;
+      
+    // If 'minecraft' mode of appearance,
+    // round down y posZ to a whole number,
+    // and draw black block outlines.
+    if (mc) {
+      y = floor(y);
+      //stroke(0);
+    } else {
+      //noStroke();
+    }
+      
+    // Translate to block posZ.
+    translate(floor(x*bs),
+              floor(-y*bs),
+              floor(z*bs));
+    //texture(soilTex);
+    //specularMaterial(128);
+    shininess(0.1);
+    
+    box(bs,bh,bs);
+      /*
+    // Now translate to just above block
+    // to draw another, flat block to
+    // serve as grass.
+    translate(0,-bh*0.51,0);
+    //texture(grass);
+    specularMaterial(0,255,0);
+    // White 'snow' if at particular height.
+    if (y > 8)emissiveMaterial(255);
+    shininess(100);
+    box(bs,bs*0.1,bs);
+    */
+    
+    pop();
+    }
+    
+  } 	
+}
+
+function genTerrain(){
+	if (!grounded) setupGroundPlane();
+	
+	push();
+	
+	//background(0,132,232);
+  background(0,0,0);
+	
+	lightingSteering();
+	
+	triTerrain();
+  
+  //voxelTerrain();
+  
+	renderCraft();
   
   pop();
 }

@@ -4,7 +4,8 @@ let pos;
 const thrust=0.2;
 
 // Precision of trig movement.
-const prec = bs*0.86;
+//const prec = bs*0.86;
+const prec = 0.1;
  
 function setupLoco(){
   acc=createVector();
@@ -83,59 +84,19 @@ function doInput(){
    acc.x+=thrust;
    acc.y+=thrust;
    //***
-   
-   //landPos.x-=bs*(sin(steerY));
-   //landPos.y+=bs*(cos(steerY));
-//    if (abs(landPos.x-landPrev.x)>=bs*prec){
-//      if (landPos.x < landPrev.x)
-//        dir=-1;
-//      else
-//        dir=1;
-     
-//      posX += bs * dir * prec;
-//      landPrev.x=landPos.x;
-//    }
-//    if (abs(landPos.y-
-//            landPrev.y)>=bs*prec){
-//      if (landPos.y < landPrev.y)
-//        dir=-1;
-//      else
-//        dir=1;
-//      posZ += bs * dir * prec;
-//      landPrev.y=landPos.y;
-//    }
  
  }
   if (keyIsDown(DOWN_ARROW) ||
               keyIsDown(83)){
-     landPos.x-=bs*(sin(steerY));
-   landPos.y+=bs*(cos(steerY));
-   if (abs(landPos.x-
-           landPrev.x)>=bs*prec){
-     if (landPos.x < landPrev.x)
-       dir=-1;
-     else
-       dir=1;
-     posX -= bs * dir * prec;
-     landPrev.x=landPos.x;
-   }
-   if (abs(landPos.y-
-           landPrev.y)>=bs*prec){
-     if (landPos.y < landPrev.y)
-       dir=-1;
-     else
-       dir=1;
-     posZ -= bs * dir * prec;
-     landPrev.y=landPos.y;
-   }
+     acc.x-=thrust;
+     acc.y-=thrust;
    
   }
    if (keyIsDown(LEFT_ARROW)){
-   //posX += bs*1;
      steerY-=3;
  }if 
    (keyIsDown(RIGHT_ARROW)){
-     //posX -= bs*1;
+     
      steerY+=3;
    }
 }
