@@ -29,7 +29,10 @@ push();
     
 	// Oh, to optimize a little I could record this
 	// value from above terrain generation.
-  let y = noise((adjust-
+	let y = noise((adjust-posX)/cfreq,
+                  (adjust-posZ)/cfreq)*camp;
+	
+  y += noise((adjust-
                  posX)/freq,
           (adjust-posZ)/freq)*amp;
   //let target=bh*y*0.5;
@@ -135,8 +138,8 @@ function lightingSteering(){
 function triTerrain(){
 push();
 	
-	//translate(-cols*0.5*bs,amp*bh*0.4,-rows*0.5*bs);
-	translate(0,amp*tbh*0.3,0);
+	//translate(0,amp*tbh*0.3,0);
+	translate(0,(amp+camp)*tbh*0.5,0);
 	rotateX(90);
 	
 	fill(255);
@@ -151,10 +154,19 @@ push();
 	for (let z = -trows*0.5; z < trows*0.5; z+=1){
 		beginShape(TRIANGLE_STRIP)
 		for (let x = -tcols*0.5; x < tcols*0.5; x+=1){
-		let y = noise((adjust+x*tbs-posX)/freq,
+			
+		let y = noise((adjust+x*tbs-posX)/cfreq,
+                  (adjust+z*tbs-posZ)/cfreq)*camp;
+		let y2 = noise((adjust+x*tbs-posX)/cfreq,
+                  (adjust+(z+1)*tbs-posZ)/cfreq)*camp;	
+			
+		y += noise((adjust+x*tbs-posX)/freq,
                   (adjust+z*tbs-posZ)/freq)*amp;
-		let y2 = noise((adjust+x*tbs-posX)/freq,
+		y2 += noise((adjust+x*tbs-posX)/freq,
                   (adjust+(z+1)*tbs-posZ)/freq)*amp;
+			
+			
+			
 			vertex(x*tbs,z*tbs,y*tbh);
 			vertex(x*tbs,(z+1)*tbs,y2*tbh);
 		}

@@ -20,6 +20,8 @@ let cols=128;
 let bh;    // Block height.
 let freq = 800;  // Perlin frequency.
 let amp = 16;    // Perlin amplitude.
+let cfreq = 16000;  // Perlin continental frequency.
+let camp = 32;    // Perlin continental amplitude.
 
 // For tris.
 let trows=128;

@@ -26,12 +26,17 @@ function setup() {
                windowHeight,
                WEBGL);
   
+	// places us upside down.
+	//frustum(-width/2, width/2, -height/2, height/2, 1000, -1000);
+//	frustum(-width/2, width/2, height/2, -height/2, 1000, -3000);
+	
+	
 	// For text.
 	pg = createGraphics(200, 200);
   pg.textSize(75);
 	
   angleMode(DEGREES);
-  
+  //perspective(70, width / height, 0.1, -9400);
 	// To display 3D cords on screen.
 	//debugMode();
 	
@@ -62,9 +67,9 @@ function setup() {
 	//bs = 42;
 	//bh = amp*6;
 	
-	trows=128; // Default 128. Performance.
-	tcols=128;
-	tbs = 128; // Default 42.
+	trows=142; // Default 128. Performance.
+	tcols=142;
+	tbs = 64; // Default 42.
 	tbh = amp*6;
 	
 	rows=32; // 32 Performant.
