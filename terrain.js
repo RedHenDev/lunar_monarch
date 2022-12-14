@@ -7,7 +7,8 @@ function genTerrain(){
 	push();
 	
 	//background(0,132,232);
-  background(0,0,0);
+  //background(0,Math.sin(frameCount*0.01)*122+122,0);
+	background(0);
 	
 	lightingSteering();
 	
@@ -32,14 +33,12 @@ push();
 	let y = noise((adjust-posX)/cfreq,
                   (adjust-posZ)/cfreq)*camp;
 	
-  y += noise((adjust-
-                 posX)/freq,
+  y += noise((adjust-posX)/freq,
           (adjust-posZ)/freq)*amp;
-  //let target=bh*y*0.5;
-	target=y*0.5*bh;
+  let target=bh*y;
+	//let target=y+amp+camp*2;
 	
-	// Go up or down?
-  let guod=target-subY;
+	
 	// default scale is 42.
 	let buggyScale=42;
   subY=lerp(subY,target,0.2);
@@ -48,10 +47,11 @@ push();
 	let lunarBob=Math.sin(frameCount*0.1)*
 			buggyScale*0.5;
   translate(0,
-						-subY-bh-buggyScale*2+lunarBob,
+						-subY-tbh-buggyScale*2+lunarBob,
 						0);
     goblinY=
       lerp(goblinY,steerY,0.1);
+	
     //rotateX(180);
     // These rotations for
     //shuttle.
@@ -61,7 +61,17 @@ push();
     rotateY(goblinY+90);
     rotateY(180);
     // Nodding pitch animation.
-    rotateZ(-guod*0.1);
+		// Go up or down?
+  	let guod=(target-subY)*-0.55;
+    //rotateZ(-guod*0.1);
+		goblinZ=lerp(goblinZ,guod,0.1);
+		rotateZ(goblinZ);
+		
+	// Roll animation.
+//	goblinX=
+//      lerp(goblinX,steerY,0.1);
+//	rotateX(goblinX+45);
+	
     // Shakey.
     //rotateX(random()*5-2.5);
     scale(buggyScale);
@@ -110,7 +120,17 @@ function lightingSteering(){
 	// Sync with triterrain.
 	//translate(0,amp*bh*0.42,bs*2);
 	
-	translate(0,amp*32,-1950);
+	let y = noise((adjust-posX)/cfreq,
+                (adjust-posZ)/cfreq)*camp;
+			
+	y += noise((adjust-posX)/freq,
+             (adjust-posZ)/freq)*amp;
+	
+	camTarget = lerp(camTarget,(amp+camp+64)*y,0.1);
+	translate(0,camTarget,-1950);
+	
+	//translate(0,(amp+camp+64)*12,-1950);
+	
   
 	rotateX(-25);
   // Pitch control.
@@ -139,7 +159,7 @@ function triTerrain(){
 push();
 	
 	//translate(0,amp*tbh*0.3,0);
-	translate(0,(amp+camp)*tbh*0.5,0);
+	//translate(0,(amp+camp+64),0);
 	rotateX(90);
 	
 	fill(255);
@@ -158,7 +178,12 @@ push();
 		let y = noise((adjust+x*tbs-posX)/cfreq,
                   (adjust+z*tbs-posZ)/cfreq)*camp;
 		let y2 = noise((adjust+x*tbs-posX)/cfreq,
-                  (adjust+(z+1)*tbs-posZ)/cfreq)*camp;	
+                  (adjust+(z+1)*tbs-posZ)/cfreq)*camp;
+		
+//		y += noise((adjust+x*tbs-posX)/5000,
+//                  (adjust+z*tbs-posZ)/5000)*64;
+//		y2 += noise((adjust+x*tbs-posX)/5000,
+//                  (adjust+(z+1)*tbs-posZ)/5000)*64;
 			
 		y += noise((adjust+x*tbs-posX)/freq,
                   (adjust+z*tbs-posZ)/freq)*amp;

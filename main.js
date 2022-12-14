@@ -37,6 +37,7 @@ function setup() {
 	
   angleMode(DEGREES);
   //perspective(70, width / height, 0.1, -9400);
+	perspective(63, width/height,10,90000);
 	// To display 3D cords on screen.
 	//debugMode();
 	
@@ -67,10 +68,10 @@ function setup() {
 	//bs = 42;
 	//bh = amp*6;
 	
-	trows=142; // Default 128. Performance.
-	tcols=142;
-	tbs = 64; // Default 42.
-	tbh = amp*6;
+	trows=132; // Default 128. Performance.
+	tcols=132;
+	tbs = 42; // Default 42.
+	tbh = amp*6; // Legacy amp*6;
 	
 	rows=32; // 32 Performant.
 	cols=32;
