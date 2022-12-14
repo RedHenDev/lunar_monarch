@@ -89,11 +89,13 @@ function lightingSteering(){
 // Lighting.
   //let locX = mouseX - width * 0.5;
   
-//	pointLight(255, 255, 255,
-//             - width * 0.5, -4000,
-//             Math.sin(frameCount*
-//                      0.01)*2000);
-	lights();
+	pointLight(255, 255, 255,
+             - width * 0.5, -height,
+             Math.sin(frameCount*
+                      0.01)*4000);
+	
+	//lights();
+	
 //	pointLight(255, 255, 255,
 //             - width * 0.5, -1000,
 //             -2000);
@@ -162,14 +164,17 @@ push();
 	//translate(0,(amp+camp+64),0);
 	rotateX(90);
 	
-	fill(255);
+	//fill(255);
 	//stroke(0);
 	//strokeWeight(1);
-	specularMaterial(74);
-  shininess(0.1);
+	
+	//ambientMaterial(222,0,222);
+	//specularMaterial(74);
+  //shininess(0.1);
+	
 	//textureMode(NORMAL);
 	//textureWrap(REPEAT,REPEAT);
-	//texture(moonTex);
+	texture(moonTex);
 	
 	for (let z = -trows*0.5; z < trows*0.5; z+=1){
 		beginShape(TRIANGLE_STRIP)
@@ -189,8 +194,6 @@ push();
                   (adjust+z*tbs-posZ)/freq)*amp;
 		y2 += noise((adjust+x*tbs-posX)/freq,
                   (adjust+(z+1)*tbs-posZ)/freq)*amp;
-			
-			
 			
 			vertex(x*tbs,z*tbs,y*tbh);
 			vertex(x*tbs,(z+1)*tbs,y2*tbh);
