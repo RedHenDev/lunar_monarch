@@ -14,7 +14,7 @@ function genTerrain(){
 	
 	triTerrain();
 	
-  //voxelTerrain();
+  voxelTerrain();
 
 	renderCraft();
   
@@ -37,7 +37,6 @@ push();
           (adjust-posZ)/freq)*amp;
   let target=bh*y;
 	//let target=y+amp+camp*2;
-	
 	
 	// default scale is 42.
 	let buggyScale=42;
@@ -62,9 +61,9 @@ push();
     rotateY(180);
     // Nodding pitch animation.
 		// Go up or down?
-  	let guod=(target-subY)*-0.55;
+  	let guod=(target-subY)*-0.33;
     //rotateZ(-guod*0.1);
-		goblinZ=lerp(goblinZ,guod,0.1);
+		goblinZ=lerp(goblinZ,guod,0.04);
 		rotateZ(goblinZ);
 		
 	// Roll animation.
@@ -215,7 +214,8 @@ function voxelTerrain(){
       //posX = posX + 0.1;
     let y = noise((adjust+x*bs-posX)/freq,
                   (adjust+z*bs-posZ)/freq)*amp;
-      
+			y += noise((adjust+x*bs-posX)/cfreq,
+                  (adjust+z*bs-posZ)/cfreq)*camp;
     // If 'minecraft' mode of appearance,
     // round down y posZ to a whole number,
     // and draw black block outlines.
@@ -228,7 +228,7 @@ function voxelTerrain(){
       
     // Translate to block posZ.
     translate(floor(x*bs),
-              floor(-y*bs),
+              floor(-y*tbs*1.5),
               floor(z*bs));
     
 		//texture(soilTex);

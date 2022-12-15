@@ -68,9 +68,9 @@ function setup() {
 	//bs = 42;
 	//bh = amp*6;
 	
-	trows=132; // Default 128. Performance.
-	tcols=132;
-	tbs = 42; // Default 42.
+	trows=128; // Default 128. Performance.
+	tcols=128;
+	tbs = 64; // Default 42.
 	tbh = amp*6; // Legacy amp*6;
 	
 	rows=32; // 32 Performant.
