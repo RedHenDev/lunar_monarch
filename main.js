@@ -70,14 +70,14 @@ function setup() {
 	
 	trows=128; // Default 128. Performance.
 	tcols=128;
-	tbs = 64; // Default 42.
+	tbs = 32; // Default 42. 64 is OK.
 	tbh = amp*6; // Legacy amp*6;
 	
 	rows=32; // 32 Performant.
 	cols=32;
 	bs = floor(((height+trows-rows)/
 							(trows))*blockScaleFactor);
-  bh = bs * 2;
+  bh = tbh*2;
 	
 	//ambientLight(50);
 	setupStars();

@@ -14,7 +14,7 @@ let goblinX=0;
 
 let tVanish=false; // Terrain vanish?
 let bs = 1;      // Block size. Leave as 1.
-let blockScaleFactor=9;
+let blockScaleFactor=10;
 // NB adjusted in setup().
 // 32 for performance.
 let rows=128;  // How many blocks?

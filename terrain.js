@@ -41,7 +41,7 @@ function renderCraft(){
 push();
     
 	let y = generalPerlin(0,0);
-  let target=bh*y;
+  let target=y*(amp+camp)*2+height*0.5;
 	//let target=y+amp+camp*2;
 	
 	// default scale is 42.
@@ -83,7 +83,7 @@ push();
     normalMaterial();
     //specularMaterial(75);
     //emissiveMaterial(0,255,32);
-    shininess(0.1);
+    shininess(10);
     
     //sphere(64);
     model(goblin);
@@ -111,8 +111,8 @@ function lightingSteering(){
 	//lights();
 	
 	// Basic light. Allows shadows & detail across terrain.
-	pointLight(200, 200, 200,
-             width*0.25, -height*2,-3000);
+	pointLight(220, 220, 200,
+             0, -height,-500);
 	
 	// ***********
 	// ***********
@@ -146,7 +146,7 @@ function lightingSteering(){
 	
 	let y = generalPerlin(0,0);
 	
-	camTarget = lerp(camTarget,(amp+camp+64)*y,0.1);
+	camTarget = lerp(camTarget,(amp+camp)*2*y,0.1);
 	translate(0,camTarget,-1950);
 	
 	//translate(0,(amp+camp+64)*12,-1950);
@@ -185,9 +185,10 @@ push();
 	//stroke(0);
 	//strokeWeight(1);
 	
-	//ambientMaterial(250);
-	specularMaterial(200);
-  shininess(20);
+	//ambientMaterial(176);
+	
+	specularMaterial(176);
+  shininess(10);
 	
 	//textureMode(NORMAL);
 	//textureWrap(REPEAT,REPEAT);
@@ -233,12 +234,12 @@ function voxelTerrain(){
     // Translate to block posZ.
 		// Note we are using tbs, and (1.5) is magic...
     translate(floor(x*bs),
-              floor(-y*tbs*1.5),
+              floor(-y*tbs*3),
               floor(z*bs));
     
 		//texture(soilTex);
 			
-    //specularMaterial(0,200,0);
+    specularMaterial(0,200,0);
 		//shininess(0.6);
 			
 		//fill(0,255,0,32);
@@ -246,9 +247,10 @@ function voxelTerrain(){
 		//stroke(0,0,0);
 		//strokeWeight(1);
     
-		rotateX(90);
-    plane(bs,bs);
-    //box(bs,bh,bs);
+		//rotateX(90);
+    //plane(bs,bs);
+			
+    box(bs,bh,bs);
       /*
     // Now translate to just above block
     // to draw another, flat block to
