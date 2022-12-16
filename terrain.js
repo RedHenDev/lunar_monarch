@@ -1,6 +1,18 @@
 let ground;
 let grounded=false;
 
+function generalPerlin(_x,_z){
+	// Oh, to optimize a little I could record this
+	// value from above terrain generation.
+	let y = noise((adjust-posX+_x)/cfreq,
+                  (adjust-posZ+_z)/cfreq)*camp;
+	
+  y += noise((adjust-posX+_x)/freq,
+          (adjust-posZ+_z)/freq)*amp;
+	
+	return y;
+}
+
 function genTerrain(){
 	//if (!grounded) setupGroundPlane();
 	
@@ -28,13 +40,7 @@ function setupGroundPlane(){
 function renderCraft(){
 push();
     
-	// Oh, to optimize a little I could record this
-	// value from above terrain generation.
-	let y = noise((adjust-posX)/cfreq,
-                  (adjust-posZ)/cfreq)*camp;
-	
-  y += noise((adjust-posX)/freq,
-          (adjust-posZ)/freq)*amp;
+	let y = generalPerlin(0,0);
   let target=bh*y;
 	//let target=y+amp+camp*2;
 	
@@ -86,29 +92,46 @@ push();
 
 function lightingSteering(){
 // Lighting.
+	
+	// To map a light source to mouse position.
   //let locX = mouseX - width * 0.5;
   
-	pointLight(255, 255, 255,
-             - width * 0.5, -height,
-             Math.sin(frameCount*
-                      0.01)*4000);
+	// ***********
+	// ***********
+	// Main overhead light...moving.
+//	pointLight(255, 255, 255,
+//             - width * 0.5, -height,
+//             Math.sin(frameCount*
+//                      0.01)*4000);
+	// ***********
+	// ***********
 	
+	// Built in basic lights 
+	// (ambient and directional...I think).
 	//lights();
 	
-//	pointLight(255, 255, 255,
-//             - width * 0.5, -1000,
-//             -2000);
+	// Basic light. Allows shadows & detail across terrain.
+	pointLight(200, 200, 200,
+             width*0.25, -height*2,-3000);
 	
-	pointLight(177, 0, 255,
-             -width*0.5+100, 0,
-             -2000);
-	pointLight(0, 255, 0,
-             width*0.5-100, 0,
-             -2000);
+	// ***********
+	// ***********
+	// Pink green headlights.
+//	pointLight(177, 0, 255,
+//             -width*0.5+100, 0,
+//             -2000);
+//	pointLight(0, 255, 0,
+//             width*0.5-100, 0,
+//             -2000);
+	// ***********
+	// ***********
+	
 //  directionalLight(250, 250, 250,
 //									 -width * 0.5, 
 //									 -height * 0.5, 
-//									 -1);
+//									 -10000);
+	
+	
   // Positioning of camera.
   // We correlate this to max
   // amp of terrain; so, mult this
@@ -121,17 +144,12 @@ function lightingSteering(){
 	// Sync with triterrain.
 	//translate(0,amp*bh*0.42,bs*2);
 	
-	let y = noise((adjust-posX)/cfreq,
-                (adjust-posZ)/cfreq)*camp;
-			
-	y += noise((adjust-posX)/freq,
-             (adjust-posZ)/freq)*amp;
+	let y = generalPerlin(0,0);
 	
 	camTarget = lerp(camTarget,(amp+camp+64)*y,0.1);
 	translate(0,camTarget,-1950);
 	
 	//translate(0,(amp+camp+64)*12,-1950);
-	
   
 	rotateX(-25);
   // Pitch control.
@@ -167,32 +185,20 @@ push();
 	//stroke(0);
 	//strokeWeight(1);
 	
-	//ambientMaterial(222,0,222);
-	//specularMaterial(74);
-  //shininess(0.1);
+	//ambientMaterial(250);
+	specularMaterial(200);
+  shininess(20);
 	
 	//textureMode(NORMAL);
 	//textureWrap(REPEAT,REPEAT);
-	texture(moonTex);
+	//texture(moonTex);
 	
 	for (let z = -trows*0.5; z < trows*0.5; z+=1){
 		beginShape(TRIANGLE_STRIP)
 		for (let x = -tcols*0.5; x < tcols*0.5; x+=1){
 			
-		let y = noise((adjust+x*tbs-posX)/cfreq,
-                  (adjust+z*tbs-posZ)/cfreq)*camp;
-		let y2 = noise((adjust+x*tbs-posX)/cfreq,
-                  (adjust+(z+1)*tbs-posZ)/cfreq)*camp;
-		
-//		y += noise((adjust+x*tbs-posX)/5000,
-//                  (adjust+z*tbs-posZ)/5000)*64;
-//		y2 += noise((adjust+x*tbs-posX)/5000,
-//                  (adjust+(z+1)*tbs-posZ)/5000)*64;
-			
-		y += noise((adjust+x*tbs-posX)/freq,
-                  (adjust+z*tbs-posZ)/freq)*amp;
-		y2 += noise((adjust+x*tbs-posX)/freq,
-                  (adjust+(z+1)*tbs-posZ)/freq)*amp;
+		let y = generalPerlin(x*tbs,z*tbs);
+		let y2 = generalPerlin(x*tbs,(z+1)*tbs);
 			
 			vertex(x*tbs,z*tbs,y*tbh);
 			vertex(x*tbs,(z+1)*tbs,y2*tbh);
@@ -212,10 +218,8 @@ function voxelTerrain(){
     // Perlin noise to derive y-posZ
     // of each block.
       //posX = posX + 0.1;
-    let y = noise((adjust+x*bs-posX)/freq,
-                  (adjust+z*bs-posZ)/freq)*amp;
-			y += noise((adjust+x*bs-posX)/cfreq,
-                  (adjust+z*bs-posZ)/cfreq)*camp;
+    let y = generalPerlin(x*bs,z*bs);
+			
     // If 'minecraft' mode of appearance,
     // round down y posZ to a whole number,
     // and draw black block outlines.
@@ -227,6 +231,7 @@ function voxelTerrain(){
     }
       
     // Translate to block posZ.
+		// Note we are using tbs, and (1.5) is magic...
     translate(floor(x*bs),
               floor(-y*tbs*1.5),
               floor(z*bs));
@@ -236,9 +241,10 @@ function voxelTerrain(){
     //specularMaterial(0,200,0);
 		//shininess(0.6);
 			
-		fill(0,255,0,32);
-		//stroke(0,0,0,32);
-		//strokeWeight(3);
+		//fill(0,255,0,32);
+		fill(0,222,0);
+		//stroke(0,0,0);
+		//strokeWeight(1);
     
 		rotateX(90);
     plane(bs,bs);
