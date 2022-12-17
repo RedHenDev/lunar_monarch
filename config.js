@@ -4,7 +4,7 @@ let steerY=0;
 let steerX=0;
 let landPos;
 let landPrev;
-let subY = 400;
+let subY = 0;
 let pMouseX;
 let pMouseY;
 let goblin;
@@ -26,11 +26,13 @@ let bh;    // Block height.
 //let camp = 100;    // Perlin continental amplitude.
 
 
-let freq = 800;  // Perlin frequency.
-let amp = 16;    // Perlin amplitude.
-let cfreq = 16000;  // Perlin continental frequency.
-let camp = 32;    // Perlin continental amplitude.
+let freq = 222;  // Perlin frequency.1600
+let amp = 88;    // Perlin amplitude.8
+let cfreq = 2222;  // Perlin continental frequency.3600
+let camp = 800;    // Perlin continental amplitude.32
 
+let freqs=[8000,4000,2200,1000,512,222];
+let amps=[1270,630,1110,100,64,9];
 
 // For tris.
 // Actually set in main.js setup().

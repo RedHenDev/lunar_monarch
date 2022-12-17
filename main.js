@@ -8,8 +8,7 @@ function preload(){
   //   loadModel('car1.obj');
   goblin=
     loadModel('assets/shuttle.obj');
-  moonTex=loadImage('assets/moon_tex.png');
-	//moonTex=loadImage('assets/moon_tex.png');
+  //moonTex=loadImage('assets/2k_moon.jpg');
   
   loadSounds();
   
@@ -36,21 +35,22 @@ function setup() {
   pg.textSize(75);
 	
   angleMode(DEGREES);
-  //perspective(70, width / height, 0.1, -9400);
-	perspective(63, width/height,10,90000);
+  
+	perspective(70, width/height,10,100000);
+	
 	// To display 3D cords on screen.
 	//debugMode();
 	
   strokeWeight(8);
   noStroke();
-  noiseSeed(99);
+  noiseSeed(2022);
   noCursor();
   
   setupLoco();
   
   // Land position.
-  landPos = createVector(0,0);
-  landPrev = createVector(0,0);
+  landPos = createVector(999,7777);
+  landPrev = createVector(999,7777);
   
   // Offset in Perlin terrain, to avoid
   // mirroring of terrain features.
@@ -68,10 +68,10 @@ function setup() {
 	//bs = 42;
 	//bh = amp*6;
 	
-	trows=128; // Default 128. Performance.
-	tcols=128;
-	tbs = 32; // Default 42. 64 is OK.
-	tbh = amp*6; // Legacy amp*6;
+	trows=100; // Default 128. Performance.
+	tcols=100;
+	tbs = 200; // Default 42. 64 is OK.
+	tbh = (amp+camp)/2; // Legacy amp*6;
 	
 	rows=32; // 32 Performant.
 	cols=32;

@@ -4,11 +4,22 @@ let grounded=false;
 function generalPerlin(_x,_z){
 	// Oh, to optimize a little I could record this
 	// value from above terrain generation.
-	let y = noise((adjust-posX+_x)/cfreq,
-                  (adjust-posZ+_z)/cfreq)*camp;
+	/*
+	let y = noise((posX+_x)/cfreq,
+                  (posZ+_z)/cfreq)*camp;
 	
-  y += noise((adjust-posX+_x)/freq,
-          (adjust-posZ+_z)/freq)*amp;
+	// Adjustment to offset the octaves.
+  y += noise((posX+_x+876)/freq,
+          (posZ+_z)/freq)*amp;
+	*/
+	
+	let y=0;
+	let offset=999; // To offset the octaves.
+	
+	for (let i=0; i < freqs.length; i++){
+		y += noise((posX+_x)/freqs[i],
+										(posZ+_z)/freqs[i])*amps[i];
+	}
 	
 	return y;
 }
@@ -26,7 +37,7 @@ function genTerrain(){
 	
 	triTerrain();
 	
-  voxelTerrain();
+  //voxelTerrain();
 
 	renderCraft();
   
@@ -40,20 +51,19 @@ function setupGroundPlane(){
 function renderCraft(){
 push();
     
-	let y = generalPerlin(0,0);
-  let target=y*(amp+camp)*2+height*0.5;
-	//let target=y+amp+camp*2;
+	let y = generalPerlin(0,-320);
+  //let target=y*(amp+camp)*2+height*0.5;
+	let target=y;
 	
 	// default scale is 42.
-	let buggyScale=42;
+	let buggyScale=150;
   subY=lerp(subY,target,0.2);
-   // if (frameCount % 200===0)
-   //   print(y);
+   
 	let lunarBob=Math.sin(frameCount*0.1)*
 			buggyScale*0.5;
   translate(0,
-						-subY-tbh-buggyScale*2+lunarBob,
-						0);
+						-y,
+						-700-320);
     goblinY=
       lerp(goblinY,steerY,0.1);
 	
@@ -112,17 +122,17 @@ function lightingSteering(){
 	
 	// Basic light. Allows shadows & detail across terrain.
 	pointLight(220, 220, 200,
-             0, -height,-500);
+             0, 0,-1400);
 	
 	// ***********
 	// ***********
 	// Pink green headlights.
-//	pointLight(177, 0, 255,
-//             -width*0.5+100, 0,
-//             -2000);
-//	pointLight(0, 255, 0,
-//             width*0.5-100, 0,
-//             -2000);
+	pointLight(177, 0, 255,
+             -width*0.5+100, 0,
+             -600);
+	pointLight(0, 255, 0,
+             width*0.5-100, 0,
+             -600);
 	// ***********
 	// ***********
 	
@@ -146,12 +156,13 @@ function lightingSteering(){
 	
 	let y = generalPerlin(0,0);
 	
-	camTarget = lerp(camTarget,(amp+camp)*2*y,0.1);
-	translate(0,camTarget,-1950);
-	
-	//translate(0,(amp+camp+64)*12,-1950);
+	camTarget = lerp(camTarget,y*1.5,0.1);
+	//translate(0,camTarget,-340);
+	translate(0,camTarget,-700);
   
-	rotateX(-25);
+	// Default -25.
+	rotateX(-40);
+	
   // Pitch control.
 //  steerX+=(mouseY-
 //        pMouseY)*mouseSensitivity;
@@ -177,8 +188,6 @@ function lightingSteering(){
 function triTerrain(){
 push();
 	
-	//translate(0,amp*tbh*0.3,0);
-	//translate(0,(amp+camp+64),0);
 	rotateX(90);
 	
 	//fill(255);
@@ -188,7 +197,7 @@ push();
 	//ambientMaterial(176);
 	
 	specularMaterial(176);
-  shininess(10);
+  shininess(25);
 	
 	//textureMode(NORMAL);
 	//textureWrap(REPEAT,REPEAT);
@@ -201,8 +210,9 @@ push();
 		let y = generalPerlin(x*tbs,z*tbs);
 		let y2 = generalPerlin(x*tbs,(z+1)*tbs);
 			
-			vertex(x*tbs,z*tbs,y*tbh);
-			vertex(x*tbs,(z+1)*tbs,y2*tbh);
+			vertex(x*tbs,z*tbs,y);
+			vertex(x*tbs,(z+1)*tbs,y2);
+			
 		}
 		endShape();
 	}
@@ -232,25 +242,25 @@ function voxelTerrain(){
     }
       
     // Translate to block posZ.
-		// Note we are using tbs, and (1.5) is magic...
+		// Note we are using tbs, and (1.5 or 3) is magic...
     translate(floor(x*bs),
-              floor(-y*tbs*3),
+              floor(-y*tbs*1.5),
               floor(z*bs));
     
-		//texture(soilTex);
+		//texture(moonTex);
 			
-    specularMaterial(0,200,0);
+    //specularMaterial(0,200,0);
 		//shininess(0.6);
 			
 		//fill(0,255,0,32);
-		fill(0,222,0);
+		//fill(0,222,0);
 		//stroke(0,0,0);
 		//strokeWeight(1);
     
-		//rotateX(90);
-    //plane(bs,bs);
+		rotateX(90);
+    plane(bs,bs);
 			
-    box(bs,bh,bs);
+    //box(bs,bh,bs);
       /*
     // Now translate to just above block
     // to draw another, flat block to

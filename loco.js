@@ -21,8 +21,8 @@ function engine(){
   
   vel.add(traj);
   landPos.add(vel);
-	posZ = landPos.y*bs;
-	posX = -landPos.x*bs;
+	posZ = -landPos.y*bs;
+	posX = landPos.x*bs;
 	
 	vel.mult(0.92);
 	acc.mult(0);
