@@ -3,9 +3,11 @@ let vel;
 let pos;
 const thrust=0.2;
 
+let lift=0;
+
 // Precision of trig movement.
 //const prec = bs*0.86;
-const prec = bs*0.86;
+const prec = bs;//Math.sqrt(bs*bs+bs*bs)*bs;
  
 function setupLoco(){
   acc=createVector();
@@ -21,8 +23,8 @@ function engine(){
   
   vel.add(traj);
   landPos.add(vel);
-	posZ = -landPos.y*bs;
-	posX = landPos.x*bs;
+	posZ = -landPos.y*bs;//*bs
+	posX = landPos.x*bs;//*bs
 	
 	vel.mult(0.92);
 	acc.mult(0);
@@ -81,9 +83,9 @@ function mousePressed(){
   // Toggle 'minecraft' look.
   //mc = !mc;
   // tVanish=!tVanish;
-  mouseX=width*0.5;
-  mouseY=height*0.5;
-  genTerrain();
+  //mouseX=width*0.5;
+  //mouseY=height*0.5;
+  //genTerrain();
 }
 
 
