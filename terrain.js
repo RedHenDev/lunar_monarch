@@ -15,8 +15,14 @@ function genTerrain(){
 	
 	triTerrain();
 	
-  voxelTerrain();
+  //voxelTerrain();
 
+	push();
+	translate(carPos);
+	scale(100);
+	model(car);
+	pop();
+	
 	renderCraft();
   
   //pop();
@@ -37,17 +43,17 @@ push();
 	//stroke(0);
 	//strokeWeight(1);
 	
-	//ambientMaterial(176);
+	ambientMaterial(176);
 	
 	specularMaterial(196);
   shininess(2);
 	
 	//textureMode(NORMAL);
-	//textureWrap(REPEAT,REPEAT);
 	//texture(moonTex);
 	
 	for (let z = -trows*0.5; z < trows*0.5; z+=1){
-		beginShape(TRIANGLE_STRIP)
+		beginShape(TRIANGLE_STRIP);
+		
 		for (let x = -tcols*0.5; x < tcols*0.5; x+=1){
 			
 		let y = generalPerlin(x*tbs,z*tbs);
@@ -94,8 +100,8 @@ function voxelTerrain(){
     
 		//texture(moonTex);
 			
-    //specularMaterial(0,200,0);
-		//shininess(0.6);
+//    specularMaterial(0,255,0);
+//		shininess(60);
 			
 		fill(0,255,0,164);
 		//fill(0,222,0);

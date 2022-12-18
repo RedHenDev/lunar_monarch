@@ -12,7 +12,7 @@ push();
 	let lunarBob=Math.sin(frameCount*0.1)*
 			buggyScale*0.5;
   translate(0,
-						-y-buggyScale,
+						-y-buggyScale*1.5,
 						0);
     goblinY=
       lerp(goblinY,steerY,0.1);
