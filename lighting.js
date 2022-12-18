@@ -32,6 +32,7 @@ function lighting(){
 //	pointLight(220, 220, 220,
 //             0, 700,
 //						 -8500);
+	//lightFalloff(1,0,0);
 	pointLight(220, 220, 220,
              0, 700,
 						 -8500);

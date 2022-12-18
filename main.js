@@ -30,7 +30,7 @@ function setup() {
 //	frustum(-width/2, width/2, height/2, -height/2, 1000, -3000);
 	
 	// Object in terrain test.
-	carPos=createVector(999,7777,0);
+	carPos=createVector(0,0,0);
 	
 	// For text.
 	pg = createGraphics(200, 200);
@@ -92,17 +92,18 @@ function draw(){
 	
   doInput();
   engine();
-	
+	push();
   genTerrain();
-	//drawStars();
-	// ui
+//	pop();
+//	//drawStars();
+//	// ui
 //	pg.background(0,100,100);
 //	pg.fill(255);
-//  pg.text(frameRate(),0,100);
+//  pg.text(posZ/bs+7777,0,100);
 //  //pass image as texture
 //  texture(pg);
 //  //rotateX(frameCount);
 //  //noStroke();
 //  plane(200);
-	
+//	push();
 }

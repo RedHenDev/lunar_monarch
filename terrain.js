@@ -15,12 +15,17 @@ function genTerrain(){
 	
 	triTerrain();
 	
-  //voxelTerrain();
+  voxelTerrain();
 
 	push();
-	translate(carPos);
-	scale(100);
+	// Eureka!
+	translate(-(posX/bs-999)*bs,-height*1.5,-(posZ/bs+7777)*bs);
+	
+	//translate(0,-height*1.5,0);
+	scale(400);
+	emissiveMaterial(200,200,0);
 	model(car);
+	
 	pop();
 	
 	renderCraft();
