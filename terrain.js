@@ -19,7 +19,7 @@ function genTerrain(){
 
 	push();
 	// Eureka!
-	translate(-(posX/bs-999)*bs,-height*1.5,-(posZ/bs+7777)*bs);
+	translate(-(posX/bs-carPos.x)*bs,-height*1.5-carPos.y,-(posZ/bs+carPos.z)*bs);
 	
 	//translate(0,-height*1.5,0);
 	scale(400);

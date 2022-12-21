@@ -30,7 +30,7 @@ function setup() {
 //	frustum(-width/2, width/2, height/2, -height/2, 1000, -3000);
 	
 	// Object in terrain test.
-	carPos=createVector(0,0,0);
+	carPos=createVector(999,0,7600);
 	
 	// For text.
 	pg = createGraphics(200, 200);
