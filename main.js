@@ -81,6 +81,9 @@ function setup() {
 							(trows))*blockScaleFactor);
   bh = tbh*2;
 
+	// Terrain objects, including antbots.
+	setup_objects();
+	
 	//setupStars();
   startRadio();
   genTerrain();
@@ -106,4 +109,5 @@ function draw(){
 //  //noStroke();
 //  plane(200);
 //	push();
+	
 }

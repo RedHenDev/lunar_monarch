@@ -15,7 +15,7 @@ function genTerrain(){
 	
 	triTerrain();
 	
-  voxelTerrain();
+  //voxelTerrain();
 
 	push();
 	// Eureka!
@@ -26,6 +26,22 @@ function genTerrain(){
 	emissiveMaterial(200,200,0);
 	model(car);
 	
+	
+	pop();
+	
+	
+	// Antbots.
+	push();
+	//translate(0,-height*2-400,-100);
+	translate(-(posX/bs-carPos.x)*bs,-height*2-height*2,-(posZ/bs+carPos.z)*bs);
+	rotateY(-steerY-180);
+	for (let a = 0; a < antMan.ants.length;a++){
+		let hopF=p5.Vector.random3D().mult(10);
+		antMan.ants[a].acc.add(hopF);
+		//print(antMan.ants[a].acc)
+		antMan.ants[a].EulerUpdate();
+		antMan.ants[a].render();
+	}
 	pop();
 	
 	renderCraft();

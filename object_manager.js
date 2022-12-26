@@ -1,14 +1,14 @@
 /*
 Manager for objects to be distributed across terrain.
 
-
-
 */
 
-let items=[];
-const noi = 9;
+const noi=100;
+
+let antMan = new AntBot();
+
 function setup_objects(){
 	for (let i=0;i<noi;i++){
-		
+		antMan.newAnt();
 	}
 }
