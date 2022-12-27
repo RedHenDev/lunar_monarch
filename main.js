@@ -2,6 +2,8 @@
 p5.disableFriendlyErrors=true;
 
 function preload(){
+	createVRCanvas();
+	
   // goblin=
   //   loadModel('imp_storm.obj');
    car=
@@ -21,9 +23,9 @@ function preload(){
 }
 let pg;
 function setup() {
-  createCanvas(windowWidth,
-               windowHeight,
-               WEBGL);
+//  createCanvas(windowWidth,
+//               windowHeight,
+//               WEBGL);
   
 	// places us upside down.
 	//frustum(-width/2, width/2, -height/2, height/2, 1000, -1000);
@@ -85,7 +87,7 @@ function setup() {
 	setup_objects();
 	
 	//setupStars();
-  startRadio();
+  //startRadio();
   genTerrain();
 
 }

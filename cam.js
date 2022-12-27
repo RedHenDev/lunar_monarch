@@ -19,9 +19,13 @@ function tim_burton(){
 	
 	let y = generalPerlin(0,0);
 	
-	camTarget = lerp(camTarget,y*1.6,0.1);
-	//translate(0,camTarget,-340);
+	// VR.
+	camTarget = lerp(camTarget,y*1.6-1200,0.1);
+	// Non VR camTarget assignment. 1.6 is magic.
+	//camTarget = lerp(camTarget,y*1.6,0.1);
 	translate(0,camTarget,-2000);
+	// Legacy translate.
+	//translate(0,camTarget,-340);
   
 	// Default -25.
 	rotateX(-15);

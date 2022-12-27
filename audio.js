@@ -9,6 +9,8 @@ function loadSounds(){
 
 function startRadio(){
   
-  currentTrack.play();
+	if (!currentTrack.isPlaying){
+  	currentTrack.play();
+	}
   
 }
