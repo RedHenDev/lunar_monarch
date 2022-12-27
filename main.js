@@ -2,7 +2,7 @@
 p5.disableFriendlyErrors=true;
 
 function preload(){
-	createVRCanvas();
+	//createVRCanvas();
 	
   // goblin=
   //   loadModel('imp_storm.obj');
@@ -23,9 +23,9 @@ function preload(){
 }
 let pg;
 function setup() {
-//  createCanvas(windowWidth,
-//               windowHeight,
-//               WEBGL);
+  createCanvas(windowWidth,
+               windowHeight,
+               WEBGL);
   
 	// places us upside down.
 	//frustum(-width/2, width/2, -height/2, height/2, 1000, -1000);
