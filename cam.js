@@ -20,13 +20,13 @@ function tim_burton(){
 	let y = generalPerlin(0,0);
 	
 	// VR.
-	camTarget = lerp(camTarget,y-800,0.1);
+	//camTarget = lerp(camTarget,y-800,0.1);
 	//setViewerPosition(0, camTarget, 400);
-	translate(0,camTarget,-2000);
+	//translate(0,camTarget,-2000);
 	
 	// Non VR camTarget assignment. 1.6 is magic.
-	//camTarget = lerp(camTarget,y*1.6,0.1);
-	//translate(0,camTarget,-2000);
+	camTarget = lerp(camTarget,y*1.6,0.1);
+	translate(0,camTarget,-2000);
 	
 	// Legacy translate.
 	//translate(0,camTarget,-340);

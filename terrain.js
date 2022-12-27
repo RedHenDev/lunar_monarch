@@ -11,8 +11,8 @@ function genTerrain(){
   //background(0,Math.sin(frameCount*0.01)*122+122,0);
 	
 	// Commented out for VR test.
-	//background(0);
-	setVRBackgroundColor(0, 0, 0);
+	background(0);
+	//setVRBackgroundColor(0, 0, 0);
 	
 	lighting();
 	tim_burton();
