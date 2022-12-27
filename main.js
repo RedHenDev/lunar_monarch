@@ -2,7 +2,7 @@
 p5.disableFriendlyErrors=true;
 
 function preload(){
-	//createVRCanvas();
+	createVRCanvas();
 	
   // goblin=
   //   loadModel('imp_storm.obj');
@@ -23,9 +23,11 @@ function preload(){
 }
 let pg;
 function setup() {
-  createCanvas(windowWidth,
-               windowHeight,
-               WEBGL);
+	// Comment out for VR test.
+//  createCanvas(windowWidth,
+//               windowHeight,
+//               WEBGL);
+	perspective(69, width/height,1,40000);
   
 	// places us upside down.
 	//frustum(-width/2, width/2, -height/2, height/2, 1000, -1000);
@@ -40,7 +42,8 @@ function setup() {
 	
   angleMode(DEGREES);
   
-	perspective(69, width/height,1,40000);
+	// Commented out for VR mode.
+//	perspective(69, width/height,1,40000);
 	
 	// To display 3D cords on screen.
 	//debugMode();
