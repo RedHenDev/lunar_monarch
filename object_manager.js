@@ -3,7 +3,7 @@ Manager for objects to be distributed across terrain.
 
 */
 
-const noi=100;
+const noi=10;
 
 let antMan = new AntBot();
 
