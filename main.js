@@ -77,8 +77,8 @@ function setup() {
 	//bs = 42;
 	//bh = amp*6;
 	
-	trows=80; // Default 128. Performance.
-	tcols=80;
+	trows=64; // Default 80. Performance.
+	tcols=64;
 	tbs = 200; // Default 42. 64 is OK.
 	tbh = (amp+camp)/2; // Legacy amp*6;
 	
@@ -104,7 +104,7 @@ function draw(){
   engine();
 	push();
   genTerrain();
-//	pop();
+pop();
 //	//drawStars();
 //	// ui
 //	pg.background(0,100,100);
