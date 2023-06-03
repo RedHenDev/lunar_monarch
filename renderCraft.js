@@ -1,7 +1,7 @@
 function renderCraft(){
 push();
     
-	let y = generalPerlin(0,320);
+	let y = generalPerlin(0,320)*1.5;
   //let target=y*(amp+camp)*2+height*0.5;
 	let target=y;
 	

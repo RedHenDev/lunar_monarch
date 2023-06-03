@@ -8,7 +8,9 @@ function genTerrain(){
 	
 	// Legacy backgrounds.
 	//background(0,132,232);
-  //background(0,Math.sin(frameCount*0.01)*122+122,0);
+//  background(	0,
+//						 	Math.sin(frameCount*0.01)*122+122,
+//							Math.sin(frameCount*0.01)*122+122);
 	
 	// Commented out for VR test.
 	background(0);
@@ -19,15 +21,16 @@ function genTerrain(){
 	
 	triTerrain();
 	
-  //voxelTerrain();
+  voxelTerrain();
 
 	push();
 	// Eureka!
 	translate(-(posX/bs-carPos.x)*bs,-height*1.5-carPos.y,-(posZ/bs+carPos.z)*bs);
+	rotateZ(180);
 	
 	//translate(0,-height*1.5,0);
 	scale(400);
-	emissiveMaterial(200,200,0);
+	emissiveMaterial(0,200,0);
 	model(car);
 	
 	
@@ -37,6 +40,7 @@ function genTerrain(){
 	// Antbots.
 	push();
 	//translate(0,-height*2-400,-100);
+	
 	translate(-(posX/bs-carPos.x)*bs,-height*2-height*2,-(posZ/bs+carPos.z)*bs);
 	rotateY(-steerY-180);
 	for (let a = 0; a < antMan.ants.length;a++){

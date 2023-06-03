@@ -19,14 +19,9 @@ let bs = 1;      // Block size. Leave as 1.
 let blockScaleFactor=10;
 // NB adjusted in setup().
 // 32 for performance.
-let rows=128;  // How many blocks?
-let cols=128;
+let rows;  // How many blocks?
+let cols;
 let bh;    // Block height.
-//let freq = 8;  // Perlin frequency.
-//let amp = 16;    // Perlin amplitude.
-//let cfreq = 5;  // Perlin continental frequency.
-//let camp = 100;    // Perlin continental amplitude.
-
 
 let freq = 222;  // Perlin frequency.1600
 let amp = 88;    // Perlin amplitude.8
@@ -38,10 +33,24 @@ let amps=[1270,630,310,200,64,9];
 
 // For tris.
 // Actually set in main.js setup().
-let trows=128;
-let tcols=128;
-let tbs = 80;
-let tbh = amp*6;
+let trows;
+let tcols;
+let tbs;
+let tbh;
+
+//****
+trows=64; // Default 80. Performance.
+tcols=64;
+tbs = 420; // Default 42. 64 is OK. 420 best?
+tbh = (amp+camp)/2; // Legacy amp*6;
+
+rows=16; // 32 Performant.
+cols=16;
+// Uses floor, so must be set in main.js setup().
+//bs = floor(((height+trows-rows)/
+//						(trows))*blockScaleFactor);
+bh = tbh*2;
+//****
        
 let camTarget=0; 	// lerping camera movement in terrain.
 let mc = false;   // Minecraft look?

@@ -298,15 +298,15 @@ class antBot {
             this.myBod.bod.position.y < -100 ||
             this.myBod.bod.position.y > height+100){
         this.myBod.makePosition(
-            width/2,
-            height/6);
+            width*0.5,
+            height*0.16);
             this.myBod.makeAngle(0);
             }
         }
         
         else {
             if (this.pos.x < 0 || this.pos.x > width || this.pos.y < 0     || this.pos.y > height)
-            this.pos = createVector(width/2,height/6);
+            this.pos = createVector(width*0.5,height*0.16);
             }
             
     }
@@ -349,14 +349,14 @@ class antBot {
         noStroke();
         fill(this.col,101);
         ellipse(this.pos.x + this.antPX,
-                this.pos.y - this.antPY-(this.antY/2)-this.antBulb/3,
+                this.pos.y - this.antPY-(this.antY*0.5)-this.antBulb*0.3,
             this.antBulb*Math.sin((frameCount/(this.blinkRate/3))));
         // Bobble halo.
          noStroke();
         fill(255,72);
         ellipse(this.pos.x + this.antPX,
                 this.pos.y - this.antPY-(this.antY/2)-this.antBulb/3,
-  10+this.antBulb*2*Math.sin((frameCount/(this.blinkRate/3))));
+  10+this.antBulb*2*Math.sin((frameCount/(this.blinkRate*0.3))));
         
         
         strokeWeight(3);
@@ -423,15 +423,15 @@ class antBot {
         stroke(255);
         strokeWeight(2);
         let goldenRatio= 0.618;
-        this.posX = this.pos.x - (this.radius * this.scale) +    (this.podSize/2);
-        this.posY = (this.height/2)+(goldenRatio * (this.radius + 3*this.scale));
+        this.posX = this.pos.x - (this.radius * this.scale) +    (this.podSize*0.5);
+        this.posY = (this.height*0.5)+(goldenRatio * (this.radius + 3*this.scale));
         for (let i = 0; i < 4; i++){
         let xP = this.podSize * i + (2*this.scale);
 					// ***
 				// Prevent z-tearing.
 				translate(0,0,-0.4);
         rect(   this.posX + xP, 
-                this.pos.y + this.posY + (this.scale*3) * Math.sin((frameCount/8)+(i*this.blinkRate)),
+                this.pos.y + this.posY + (this.scale*3) * Math.sin((frameCount*0.08)+(i*this.blinkRate)),
                 this.podSize, this.podSize);
         
         }

@@ -23,7 +23,7 @@ function lighting(){
 	//lights();
 	//ambientLight(22);
 	
-	directionalLight(22, 22, 22, 0, 0, 1);
+	//directionalLight(22, 22, 22, 0, 0, 1);
 	
 	// Basic light. Allows shadows & detail across terrain.
 	// Default y was 700.
@@ -33,22 +33,23 @@ function lighting(){
 //             0, 700,
 //						 -8500);
 	//lightFalloff(1,0,0);
-	pointLight(220, 220, 220,
-             0, 700,
-						 -8500);
-	pointLight(220, 220, 220,
-             0, 700,
-						 8500);
 	
+//	pointLight(220, 220, 220,
+//             0, 700,
+//						 1);
+//	pointLight(220, 220, 220,
+//             0, 700,
+//						 1);
+
 	// ***********
 	// ***********
 	// Pink green headlights.
-//	pointLight(177, 0, 255,
-//             -width*0.5+100, -800,
-//             -6000);
-//	pointLight(0, 255, 0,
-//             width*0.5-100, -800,
-//             -6000);
+	pointLight(177, 0, 255,
+             -width*0.5+100, 800,
+             -70000);
+	pointLight(0, 255, 0,
+             width*0.5-100, 800,
+             -70000);
 	// ***********
 	// ***********
 	
