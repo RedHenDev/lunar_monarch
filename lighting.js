@@ -23,7 +23,7 @@ function lighting(){
 	//lights();
 	//ambientLight(22);
 	
-	directionalLight(155, 155, 155, 0, -0.6, 1);
+	directionalLight(155, 155, 155, 0, -0.6, 0.6);
 	
 	// Basic light. Allows shadows & detail across terrain.
 	// Default y was 700.

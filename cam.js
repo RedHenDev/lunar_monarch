@@ -17,15 +17,18 @@ function tim_burton(){
 	// Sync with triterrain.
 	//translate(0,amp*bh*0.42,bs*2);
 	
-	let y = generalPerlin(0,0);
+	// -1000 backwards from ship. Should be 700?
+	let y = generalPerlin(0,-700);
 	
 	// VR.
 	//camTarget = lerp(camTarget,y-800,0.1);
 	//setViewerPosition(0, camTarget, 400);
 	//translate(0,camTarget,-2000);
 	
-	// Non VR camTarget assignment. 1.6 is magic.
-	camTarget = lerp(camTarget,y*1.6,0.1);
+	// Non VR camTarget assignment.
+	// 1.6 is default heightMultiplier.
+	let heightMultiplier=1.2;
+	camTarget = lerp(camTarget,y*heightMultiplier,0.1);
 	translate(0,camTarget,-2000);
 	
 	// Legacy translate.

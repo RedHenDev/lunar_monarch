@@ -111,8 +111,9 @@ function voxelTerrain(){
 		// Floor out values.
 		let wx = floor(x*bs);
 		let wz = floor(z*bs);
-		// *1.1 to lift just above terrain.
-    let y = generalPerlin(wx,wz)*1.1;
+		// *1.04 to lift just above terrain.
+		// NB should relate to camera height multiplier.
+    let y = generalPerlin(wx,wz)*1.04;
 			
     // If 'minecraft' mode of appearance,
     // round down y posZ to a whole number,

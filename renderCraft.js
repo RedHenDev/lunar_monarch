@@ -1,8 +1,7 @@
 function renderCraft(){
 push();
     
-	// *1.5 to hover higher.
-	let y = generalPerlin(0,320)*1.5;
+	let y = generalPerlin(0,320)*hoverFactor;
 	y=lerp(prevGoblinH,y,0.1);
 	prevGoblinH=y;
   //let target=y*(amp+camp)*2+height*0.5;
@@ -30,9 +29,10 @@ push();
     rotateY(180);
     // Nodding pitch animation.
 		// Go up or down?
-  	let guod=(target-subY)*-0.33;
+  	let guod=(target-subY)*-0.25;
     //rotateZ(-guod*0.1);
-		goblinZ=lerp(goblinZ,guod,0.04);
+		// Default lerp rate is 0.04.
+		goblinZ=lerp(goblinZ,guod,0.2);
 		rotateZ(goblinZ);
 		
 	// Roll animation.
