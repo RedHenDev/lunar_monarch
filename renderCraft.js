@@ -1,7 +1,10 @@
 function renderCraft(){
 push();
     
+	// *1.5 to hover higher.
 	let y = generalPerlin(0,320)*1.5;
+	y=lerp(prevGoblinH,y,0.1);
+	prevGoblinH=y;
   //let target=y*(amp+camp)*2+height*0.5;
 	let target=y;
 	

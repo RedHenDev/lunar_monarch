@@ -23,7 +23,7 @@ function lighting(){
 	//lights();
 	//ambientLight(22);
 	
-	//directionalLight(22, 22, 22, 0, 0, 1);
+	directionalLight(155, 155, 155, 0, -0.6, 1);
 	
 	// Basic light. Allows shadows & detail across terrain.
 	// Default y was 700.
@@ -44,12 +44,18 @@ function lighting(){
 	// ***********
 	// ***********
 	// Pink green headlights.
-	pointLight(177, 0, 255,
-             -width*0.5+100, 800,
-             -70000);
-	pointLight(0, 255, 0,
-             width*0.5-100, 800,
-             -70000);
+//	pointLight(177, 0, 255,
+//             -width*0.5+100, 700,
+//             500);
+//	pointLight(0, 255, 0,
+//             width*0.5-100, 700,
+//             500);
+	
+	
+	// Nice shadows from behind, and correct
+	// coloration for voxel grid:
+	pointLight(255,255,255,
+             0,500,0);
 	// ***********
 	// ***********
 	

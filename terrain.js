@@ -21,7 +21,9 @@ function genTerrain(){
 	
 	triTerrain();
 	
-  voxelTerrain();
+	if (!tVanish){
+  	voxelTerrain();
+	}
 
 	push();
 	// Eureka!
@@ -109,7 +111,8 @@ function voxelTerrain(){
 		// Floor out values.
 		let wx = floor(x*bs);
 		let wz = floor(z*bs);
-    let y = generalPerlin(wx,wz);
+		// *1.1 to lift just above terrain.
+    let y = generalPerlin(wx,wz)*1.1;
 			
     // If 'minecraft' mode of appearance,
     // round down y posZ to a whole number,

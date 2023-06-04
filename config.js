@@ -8,13 +8,14 @@ let subY = 0;
 let pMouseX;
 let pMouseY;
 let goblin;
+let prevGoblinH=0;	// For lerping height of ship.
 let goblinY=0;
 let goblinZ=0;
 let goblinX=0;
 let car;
 let carPos;
 
-let tVanish=false; // Terrain vanish?
+let tVanish=false; // Voxel terrain vanish?
 let bs = 1;      // Block size. Leave as 1.
 let blockScaleFactor=10;
 // NB adjusted in setup().

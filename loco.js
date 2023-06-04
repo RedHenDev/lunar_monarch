@@ -88,11 +88,17 @@ function mousePressed(){
   //genTerrain();
 }
 
+// Toggling vox terrain.
+function keyTyped(){
+	if (key=='t'){
+	 tVanish=!tVanish;
+ }
+}
 
 function doInput(){
   // OK buddy Eureka!
   let dir = 1;
-  
+	
  if (keyIsDown(UP_ARROW)||
      keyIsDown(87)){
    
