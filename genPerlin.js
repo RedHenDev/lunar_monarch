@@ -17,6 +17,8 @@ function generalPerlin(_x,_z){
 	for (let i=0; i < freqs.length; i++){
 		y += noise((posX+_x)/freqs[i],
 										(posZ+_z)/freqs[i])*amps[i];
+		y+=Math.sin(_x);
+		y+=Math.sin(_z);
 	}
 	
 	return y;

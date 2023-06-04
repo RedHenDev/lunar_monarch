@@ -44,18 +44,20 @@ function lighting(){
 	// ***********
 	// ***********
 	// Pink green headlights.
-//	pointLight(177, 0, 255,
-//             -width*0.5+100, 700,
-//             500);
-//	pointLight(0, 255, 0,
-//             width*0.5-100, 700,
-//             500);
+	lightFalloff(1.6,0,0);
+	pointLight(177, 0, 255,
+             -width*0.5+50, -700,
+             -8500);
+	pointLight(0, 255, 0,
+             width*0.5-50, -700,
+             -8500);
 	
 	
 	// Nice shadows from behind, and correct
 	// coloration for voxel grid:
-	pointLight(255,255,255,
-             0,500,0);
+	//lightFalloff(5,0,0);
+	pointLight(99,99,99,
+             0,-500,0);
 	// ***********
 	// ***********
 	

@@ -1,9 +1,9 @@
 // For speed.
 p5.disableFriendlyErrors=true;
-
+let testLand;
 function preload(){
 	//createVRCanvas();
-	
+	//testLand=loadModel('assets/scene.obj');
   // goblin=
   //   loadModel('imp_storm.obj');
    car=

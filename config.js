@@ -8,7 +8,7 @@ let subY = 0;
 let pMouseX;
 let pMouseY;
 let goblin;
-let hoverFactor=1.2;
+let hoverFactor=1.04;
 let prevGoblinH=0;	// For lerping height of ship.
 let goblinY=0;
 let goblinZ=0;
@@ -16,7 +16,7 @@ let goblinX=0;
 let car;
 let carPos;
 
-let tVanish=false; // Voxel terrain vanish?
+let tVanish=true; // Voxel terrain vanish?
 let bs = 1;      // Block size. Leave as 1.
 let blockScaleFactor=10;
 // NB legacy was adjusted in setup().
@@ -47,9 +47,9 @@ let tbs;
 let tbh;
 
 //****
-trows=63; // Default 80. Performant 64.
-tcols=63;
-tbs=400; // Default 42. 64 is OK. 420 best?
+trows=72; // Default 72. Performant 64.
+tcols=72;
+tbs=222; // Default 222. 64 is OK. 420 best?
 tbh=(amp+camp)/2; // Legacy amp*6;
 
 rows=16; // 16 Performant.

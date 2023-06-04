@@ -74,10 +74,10 @@ push();
 	//stroke(0);
 	//strokeWeight(1);
 	
-	ambientMaterial(176);
+	//ambientMaterial(176);
 	
 	specularMaterial(196);
-  shininess(2);
+  shininess(3);
 	
 	//textureMode(NORMAL);
 	//texture(moonTex);
@@ -111,9 +111,9 @@ function voxelTerrain(){
 		// Floor out values.
 		let wx = floor(x*bs);
 		let wz = floor(z*bs);
-		// *1.04 to lift just above terrain.
+		// *1.02 to lift just above terrain.
 		// NB should relate to camera height multiplier.
-    let y = generalPerlin(wx,wz)*1.04;
+    let y = generalPerlin(wx,wz)*1.02;
 			
     // If 'minecraft' mode of appearance,
     // round down y posZ to a whole number,
