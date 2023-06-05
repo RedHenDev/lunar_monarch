@@ -66,6 +66,7 @@ function setupGroundPlane(){
 
 
 function triTerrain(){
+
 push();
 	
 	rotateX(90);
@@ -77,7 +78,7 @@ push();
 	//ambientMaterial(176);
 	
 	specularMaterial(196);
-  shininess(3);
+  shininess(2.5);
 	
 	//textureMode(NORMAL);
 	//texture(moonTex);
@@ -102,6 +103,11 @@ push();
 
 function voxelTerrain(){
 // Our grid of blocks.
+	specularMaterial(0,255,255);
+  shininess(1.4);
+	stroke(0);
+	strokeWeight(3);
+	//fill(0,255,0,64);
   for (let z = -rows*0.5; z < rows*0.5; z++){
     for (let x = -cols*0.5; x < cols*0.5; x++){
     push();
@@ -109,8 +115,8 @@ function voxelTerrain(){
     // Perlin noise to derive y-posZ
     // of each block.
 		// Floor out values.
-		let wx = floor(x*bs);
-		let wz = floor(z*bs);
+		let wx = Math.floor(x*bs);
+		let wz = Math.floor(z*bs);
 		// *1.02 to lift just above terrain.
 		// NB should relate to camera height multiplier.
     let y = generalPerlin(wx,wz)*1.02;
@@ -119,7 +125,7 @@ function voxelTerrain(){
     // round down y posZ to a whole number,
     // and draw black block outlines.
     if (mc) {
-      y = floor(y);
+      y = Math.floor(y);
       //stroke(0);
     } else {
       //noStroke();
@@ -136,15 +142,15 @@ function voxelTerrain(){
 //    specularMaterial(0,255,0);
 //		shininess(60);
 			
-		fill(0,255,0,164);
+		
 		//fill(0,222,0);
 		//stroke(0,0,0);
 		//strokeWeight(1);
     
-		rotateX(90);
-    plane(bs,bs);
+		//rotateX(90);
+    //plane(bs,bs);
 			
-    //box(bs,bh,bs);
+    box(bs,bh,bs);
       /*
     // Now translate to just above block
     // to draw another, flat block to
@@ -160,5 +166,6 @@ function voxelTerrain(){
     
     pop();
     }
-  } 	
+  } 
+	noStroke();
 }

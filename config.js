@@ -57,7 +57,7 @@ cols=16;
 // Uses floor, so must be set in main.js setup().
 //bs = floor(((height+trows-rows)/
 //						(trows))*blockScaleFactor);
-bh = tbh*2;
+bh = tbh*0.5;
 //****
        
 let camTarget=0; 	// lerping camera movement in terrain.
