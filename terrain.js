@@ -44,9 +44,18 @@ function genTerrain(){
 	//translate(0,-height*2-400,-100);
 	
 	translate(-(posX/bs-carPos.x)*bs,-height*2-height*2,-(posZ/bs+carPos.z)*bs);
-	rotateY(-steerY-180);
+	//rotateY(-steerY-180);
+	
+	subV=createVector(posX,subY+1000,posZ);
+	
+	
+	
 	for (let a = 0; a < antMan.ants.length;a++){
-		let hopF=p5.Vector.random3D().mult(10);
+		//let hopF=p5.Vector.random3D().mult(10);
+		hunt=p5.Vector.sub(subV,antMan.ants[a].pos);
+		hunt.normalize();
+		hunt.mult(-10);
+		let hopF=hunt;
 		antMan.ants[a].acc.add(hopF);
 		//print(antMan.ants[a].acc)
 		antMan.ants[a].EulerUpdate();
