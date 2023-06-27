@@ -6,12 +6,15 @@ function preload(){
 	//testLand=loadModel('assets/scene.obj');
   // goblin=
   //   loadModel('imp_storm.obj');
-   car=
-     loadModel('assets/car1.obj');
+//   car=
+//     loadModel('assets/car1.obj');
+	car=
+     loadModel('assets/stuntmanpowerwagon.obj');
   goblin=
     loadModel('assets/shuttle.obj');
   moonTex=loadImage('assets/moon_tex.png');
-  
+  soilTex=loadImage('assets/soil.jpg');
+	
   loadSounds();
   
   // Must load font for
@@ -34,7 +37,7 @@ function setup() {
 //	frustum(-width/2, width/2, height/2, -height/2, 1000, -3000);
 	
 	// Object in terrain test.
-	carPos=createVector(999,600,7600);
+	carPos=createVector(999,2300,7600);
 	
 	// For text.
 	pg = createGraphics(200, 200);

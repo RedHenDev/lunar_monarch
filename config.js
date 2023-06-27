@@ -1,5 +1,7 @@
 let myFont;
 
+let jojo=0;
+
 let steerY=0;
 let steerX=0;
 let landPos;

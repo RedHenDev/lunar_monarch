@@ -26,13 +26,22 @@ function genTerrain(){
 	}
 
 	push();
-	// Eureka!
-	translate(-(posX/bs-carPos.x)*bs,-height*1.5-carPos.y,-(posZ/bs+carPos.z)*bs);
-	rotateZ(180);
 	
+	// To allow jojo's monster truck to move along
+	// and on landscape.
+	let mty = generalPerlin(-(posX/bs-carPos.x)*bs+jojo,
+								-(posZ/bs+carPos.z)*bs)*0.8;
+	// Eureka!
+	translate(-(posX/bs-carPos.x)*bs+jojo,-height*1.5-carPos.y-mty,-(posZ/bs+carPos.z)*bs);
+	
+	rotateZ(180);
+	jojo += 100;
 	//translate(0,-height*1.5,0);
-	scale(400);
-	emissiveMaterial(0,200,0);
+	//scale(400); // car scale 400.
+	scale(3); // Monster truck scale 3.
+	//emissiveMaterial(200,180,170);
+	specularMaterial(255,0,255);
+	//texture(soilTex);
 	model(car);
 	
 	
