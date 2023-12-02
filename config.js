@@ -1,5 +1,10 @@
+// Main co-ordinates.
+let mX = 999;
+let mZ = 7777;
+
 let myFont;
 
+// Movement of test object.
 let jojo=0;
 
 let steerY=0;
@@ -17,6 +22,9 @@ let goblinZ=0;
 let goblinX=0;
 let car;
 let carPos;
+
+// Texture constants.
+let moonTex;
 
 let tVanish=true; // Voxel terrain vanish?
 let bs = 1;      // Block size. Leave as 1.
@@ -43,19 +51,25 @@ let amps=[4270,630,310,200,64,99];
 
 // For tris.
 // Actually set in main.js setup().
+// Really?
 let trows;
 let tcols;
 let tbs;
 let tbh;
 
 //****
-trows=72; // Default 72. Performant 64.
-tcols=72;
-tbs=222; // Default 222. 64 is OK. 420 best?
+// Main terrain (triangle terrain).
+trows=68; // Default 72. Performant 64.
+tcols=68;
+// Size of each triangle.
+// 156 OK for tbs.
+tbs=255; // Default 222. 64 is OK. 420 best?
+
 tbh=(amp+camp)/2; // Legacy amp*6;
 
-rows=16; // 16 Performant.
-cols=16;
+// And these the voxel terrain?.
+rows=12; // 16 Performant.
+cols=12;
 // Uses floor, so must be set in main.js setup().
 //bs = floor(((height+trows-rows)/
 //						(trows))*blockScaleFactor);

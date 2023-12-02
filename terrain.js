@@ -14,6 +14,16 @@ function genTerrain(){
 	
 	// Commented out for VR test.
 	background(0);
+	
+	
+	push();
+	translate(0,0,-7777);
+	rotateY(steerY);
+	texture(matrixTex);
+	sphere(10000,22);
+	fill(0,240);
+	sphere(9900,22);
+	pop();
 	//setVRBackgroundColor(0, 0, 0);
 	
 	lighting();
@@ -34,8 +44,12 @@ function genTerrain(){
 	// Eureka!
 	translate(-(posX/bs-carPos.x)*bs+jojo,-height*1.5-carPos.y-mty,-(posZ/bs+carPos.z)*bs);
 	
+	// Adjust down...1/12/23
+	//translate(0,700,0);
+	
 	rotateZ(180);
-	jojo += 100;
+	// Forward movement...
+	jojo += 10;
 	//translate(0,-height*1.5,0);
 	//scale(400); // car scale 400.
 	scale(3); // Monster truck scale 3.
@@ -52,22 +66,30 @@ function genTerrain(){
 	push();
 	//translate(0,-height*2-400,-100);
 	
-	translate(-(posX/bs-carPos.x)*bs,-height*2-height*2,-(posZ/bs+carPos.z)*bs);
+	// for y -> (-height*2-height*2)-mty,
+	let antsY = generalPerlin(
+							-(posX/bs-carPos.x)*bs,
+							-(posZ/bs+carPos.z)*bs);
+	
+	translate(-(posX/bs-carPos.x)*bs,
+						-antsY,
+						-(posZ/bs+carPos.z)*bs);
 	//rotateY(-steerY-180);
 	
-	subV=createVector(posX,subY+1000,posZ);
-	
-	
+	// Attempt to target and then chase
+	// subject's ship.
+	// Let's try instead of posZ, 0.
+	//subV=createVector(posX,subY+1000,0);
 	
 	for (let a = 0; a < antMan.ants.length;a++){
 		//let hopF=p5.Vector.random3D().mult(10);
-		hunt=p5.Vector.sub(subV,antMan.ants[a].pos);
-		hunt.normalize();
-		hunt.mult(-10);
-		let hopF=hunt;
-		antMan.ants[a].acc.add(hopF);
+		//hunt=p5.Vector.sub(subV,antMan.ants[a].pos);
+		//hunt.normalize();
+		//hunt.mult(-10);
+		//let hopF=hunt;
+		//antMan.ants[a].acc.add(hopF);
 		//print(antMan.ants[a].acc)
-		antMan.ants[a].EulerUpdate();
+		//antMan.ants[a].EulerUpdate();
 		antMan.ants[a].render();
 	}
 	pop();
@@ -96,7 +118,7 @@ push();
 	//ambientMaterial(176);
 	
 	specularMaterial(196);
-  shininess(2.5);
+  shininess(3);
 	
 	//textureMode(NORMAL);
 	//texture(moonTex);

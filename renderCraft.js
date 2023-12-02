@@ -1,6 +1,6 @@
 function renderCraft(){
 push();
-    
+    // What is this 320?
 	let y = generalPerlin(0,320)*hoverFactor;
 	y=lerp(prevGoblinH,y,0.14);
 	prevGoblinH=y;
@@ -8,10 +8,13 @@ push();
 	let target=y;
 	
 	// default scale is 42.
-	let buggyScale=64;
-  subY=lerp(subY,target,0.2);
+	// 64 is OK.
+	let buggyScale=42;
+	// speed default = 0.2
+  subY=lerp(subY,target,0.4);
    
-	let bobAdjustUp=512;
+	// default 512.
+	let bobAdjustUp=128;
 	let lunarBob=Math.sin(frameCount*0.1)*
 			buggyScale*0.7+bobAdjustUp;
   translate(0,
@@ -44,10 +47,10 @@ push();
     // Shakey.
     //rotateX(random()*5-2.5);
     scale(buggyScale);
-    normalMaterial();
-    //specularMaterial(75);
+    //normalMaterial();
+    specularMaterial(0,175,175);
     //emissiveMaterial(0,255,32);
-    shininess(10);
+    shininess(25);
     
     //sphere(64);
     model(goblin);

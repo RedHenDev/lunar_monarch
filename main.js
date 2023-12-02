@@ -1,6 +1,7 @@
 // For speed.
 p5.disableFriendlyErrors=true;
 let testLand;
+
 function preload(){
 	//createVRCanvas();
 	//testLand=loadModel('assets/scene.obj');
@@ -12,10 +13,11 @@ function preload(){
      loadModel('assets/stuntmanpowerwagon.obj');
   goblin=
     loadModel('assets/shuttle.obj');
-  moonTex=loadImage('assets/moon_tex.png');
-  soilTex=loadImage('assets/soil.jpg');
+  moonTex=loadImage('assets/2k_moon.jpg');
+	matrixTex=loadImage('assets/glax.gif');
+  //soilTex=loadImage('assets/soil.jpg');
 	
-  loadSounds();
+  //loadSounds();
   
   // Must load font for
   // WEBGL context.
@@ -37,11 +39,14 @@ function setup() {
 //	frustum(-width/2, width/2, height/2, -height/2, 1000, -3000);
 	
 	// Object in terrain test.
-	carPos=createVector(999,2300,7600);
+	// x 999 y 2300 z 7600 (to be behind player) ?!
+	let cpx=-20;
+	let cpz=100;
+	carPos=createVector(mX+cpx,0,mZ+cpz);
 	
 	// For text.
-	pg = createGraphics(200, 200);
-  pg.textSize(75);
+	//pg = createGraphics(200, 200);
+  //pg.textSize(75);
 	
   angleMode(DEGREES);
   
@@ -55,14 +60,14 @@ function setup() {
 	
   strokeWeight(8);
   noStroke();
-  noiseSeed(2022);
+  noiseSeed(2023);
   noCursor();
   
   setupLoco();
   
   // Land position.
-  landPos = createVector(999,7777);
-  landPrev = createVector(999,7777);
+  landPos = createVector(mX,mZ,0);
+  landPrev = createVector(mX,mZ,0);
   
   // Offset in Perlin terrain, to avoid
   // mirroring of terrain features.
@@ -108,8 +113,8 @@ function draw(){
   doInput();
   engine();
 	push();
-  genTerrain();
-pop();
+  	genTerrain();
+	pop();
 //	//drawStars();
 //	// ui
 //	pg.background(0,100,100);
@@ -120,6 +125,6 @@ pop();
 //  //rotateX(frameCount);
 //  //noStroke();
 //  plane(200);
-//	push();
+	//push();
 	
 }

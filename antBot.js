@@ -332,7 +332,7 @@ class antBot {
         }
     
       // ***
-				translate(0,0,this.pos.z);  
+				translate(0,0,this.pos.z);
 			
         // Antenna. How exciting.
         fill(this.col);
