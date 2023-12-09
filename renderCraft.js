@@ -1,7 +1,8 @@
 function renderCraft(){
 push();
     // What is this 320?
-	let y = generalPerlin(0,320)*hoverFactor;
+	let driveY = generalPerlin(0,320)*hoverFactor;
+	let y = driveY;
 	y=lerp(prevGoblinH,y,0.14);
 	prevGoblinH=y;
   //let target=y*(amp+camp)*2+height*0.5;
@@ -9,7 +10,7 @@ push();
 	
 	// default scale is 42.
 	// 64 is OK.
-	let buggyScale=42;
+	let buggyScale=32;
 	// speed default = 0.2
   subY=lerp(subY,target,0.4);
    
@@ -17,8 +18,15 @@ push();
 	let bobAdjustUp=128;
 	let lunarBob=Math.sin(frameCount*0.1)*
 			buggyScale*0.7+bobAdjustUp;
+	let finalY=-y-buggyScale*1.5-lunarBob;
+	
+	// To prevent penetrating surface.
+//	if (-finalY < -driveY){
+//		finalY = driveY;
+//	}
+	
   translate(0,
-						-y-buggyScale*1.5-lunarBob,
+						finalY,
 						0);
     goblinY=
       lerp(goblinY,steerY,0.1);
@@ -54,5 +62,6 @@ push();
     
     //sphere(64);
     model(goblin);
+		//model(car);
   pop();	
 }

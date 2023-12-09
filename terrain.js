@@ -15,7 +15,7 @@ function genTerrain(){
 	// Commented out for VR test.
 	background(0);
 	
-	
+	// sky sphere.
 	push();
 	translate(0,0,-7777);
 	rotateY(steerY);
@@ -42,7 +42,9 @@ function genTerrain(){
 	let mty = generalPerlin(-(posX/bs-carPos.x)*bs+jojo,
 								-(posZ/bs+carPos.z)*bs)*0.8;
 	// Eureka!
-	translate(-(posX/bs-carPos.x)*bs+jojo,-height*1.5-carPos.y-mty,-(posZ/bs+carPos.z)*bs);
+	// 0.7 is the height adjustment.
+	translate(-(posX/bs-carPos.x)*bs+jojo,
+						-height*0.7-carPos.y-mty,-(posZ/bs+carPos.z)*bs);
 	
 	// Adjust down...1/12/23
 	//translate(0,700,0);
@@ -54,8 +56,12 @@ function genTerrain(){
 	//scale(400); // car scale 400.
 	scale(3); // Monster truck scale 3.
 	//emissiveMaterial(200,180,170);
-	specularMaterial(255,0,255);
+	
+	//specularMaterial(255,0,255);
+	specularMaterial(0,0,0);
+	
 	//texture(soilTex);
+	
 	model(car);
 	
 	
