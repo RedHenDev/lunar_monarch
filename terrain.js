@@ -78,7 +78,7 @@ function genTerrain(){
 							-(posZ/bs+carPos.z)*bs);
 	
 	translate(-(posX/bs-carPos.x)*bs,
-						-antsY,
+						-antsY*1.5,
 						-(posZ/bs+carPos.z)*bs);
 	//rotateY(-steerY-180);
 	

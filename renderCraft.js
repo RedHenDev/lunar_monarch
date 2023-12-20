@@ -1,6 +1,6 @@
 function renderCraft(){
 push();
-    // What is this 320?
+    // 320 arbitrary. Only x changes.
 	let driveY = generalPerlin(0,320)*hoverFactor;
 	let y = driveY;
 	y=lerp(prevGoblinH,y,0.14);
@@ -10,7 +10,7 @@ push();
 	
 	// default scale is 42.
 	// 64 is OK.
-	let buggyScale=32;
+	let buggyScale=42;
 	// speed default = 0.2
   subY=lerp(subY,target,0.4);
    

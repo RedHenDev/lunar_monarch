@@ -12,7 +12,7 @@ function generalPerlin(_x,_z){
 	*/
 	
 	let y=0;
-	let offset=999; // To offset the octaves.
+	//let offset=999; // To offset the octaves.
 	
 	for (let i=0; i < freqs.length; i++){
 		y += noise((posX+_x)/freqs[i],
